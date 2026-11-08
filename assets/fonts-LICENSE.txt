@@ -1,4 +1,5 @@
 Google Inc.
+Noto Serif CJK SC and Noto Sans CJK SC glyph subsets: Copyright 2017–2024 Adobe (http://www.adobe.com/).
 
 This Font Software is licensed under the SIL Open Font License, Version 1.1.
 This license is copied below, and is also available with a FAQ at:

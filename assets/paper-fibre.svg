@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="210" viewBox="0 0 300 210">
+  <filter id="grain" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feTurbulence type="fractalNoise" baseFrequency=".19 .45" numOctaves="3" seed="19" stitchTiles="stitch"/>
+    <feColorMatrix type="matrix" values="
+      0 0 0 0 .13
+      0 0 0 0 .105
+      0 0 0 0 .075
+      1.82 0 0 0 -.728"/>
+  </filter>
+  <rect width="300" height="210" filter="url(#grain)"/>
+</svg>

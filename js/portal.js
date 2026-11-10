@@ -1,1 +1,276 @@
-!function(){"use strict";var e=H4.esc;function t(e){try{return localStorage.getItem(e)}catch(e){return null}}function a(e,t){try{localStorage.setItem(e,t)}catch(e){H4.notice("本机无法保存设置，本次浏览仍可使用。")}}var n=H4.Portal={paths:{boot:"/connect.htm",home:"/old4/index.htm",directory:"/old4/catalog.htm",item:"/old4/read.htm",versions:"/old4/capture.htm",snapshot:"/old4/20031114/index.htm",search:"/old4/search.htm",updates:"/old4/updates.htm",about:"/old4/about.htm",corridor:"/old4/building/corridor.htm",stairs:"/old4/building/stairs.htm",basement:"/old4/building/b1.htm",rooftop:"/old4/building/roof.htm",archive:"/old4/papers/index.htm",duty:"/old4/building/duty.htm",warehouse:"/old4/building/store.htm",storage:"/old4/building/extra.htm",radio:"/old4/tapes/index.htm",footsteps:"/old4/attachments/04.htm",messages:"/old4/users/feiyao.htm",profile:"/old4/interviews/read.htm",mail:"/old4/incoming/envelope.htm",personal:"/old4/retained/linyao.htm",after:"/old4/incoming/reply.htm",record:"/old4/public/record.htm",ending:"/old4/session/end.htm"},labels:{boot:"连接镜像",home:"目录首页",directory:"文件目录",item:"维护手记",versions:"快照与补录",snapshot:"原站封面",search:"目录检索",updates:"新增往来",about:"关于这份副本",corridor:"四楼走廊",stairs:"旧梯记录",basement:"扶手下方",rooftop:"天台门边",archive:"纸面原件",duty:"值班室",warehouse:"后勤仓库",storage:"储物间",radio:"录音带",footsteps:"声音附件04",messages:"飞杳的留言页",profile:"校友材料",mail:"补录来信",personal:"留存页",after:"后续来信",record:"公开副本",ending:"本次浏览"},notes:[{id:"disk",date:"2004-01-06",title:"副本使用说明",body:"这份副本不需要连接原服务器。原来的站点邮箱已经停止收信，旧页中的投稿按钮仍保留，但不能再投递。\n\n浏览记录只存在这台设备上。换一台机器，不会带走这一次翻到的位置。"},{id:"names",date:"2004-01-06",title:"文件名保留原样",body:"旧光盘里有的文件用中文起名，有的只写编号。合在一张盘上时加了目录，文件名照旧。\n\n同名文件先比对内容；内容相同的只放一份。扫描件上的手写字不重新描，认不出的地方留空。"},{id:"photo",date:"2004-01-06",title:"照片边缘没有裁掉",body:"有几张相片压在相册里久了，边缘发白。扫描时一并保留。\n\n相片背面有字的，正反分开收。不要把背面的铅笔字压在正面的人像上。"},{id:"link",date:"2004-01-06",title:"失效链接登记",body:"旧站的校外链接没有打包进来。点击时会留在本地，显示失效说明。\n\n有些页面只剩入口，有些只剩文件。目录中分别记“链接失效”和“单页留存”，不把它们算成同一回事。"},{id:"clock",date:"2004-01-06",title:"日期按原件记",body:"光盘拷贝以后，文件的修改时间都变成了同一天。这个日期不能用来排列纸上的事。\n\n有落款的按落款，无落款的记收存日期。收存日期后面加“收存”两个字，不补写成文日期。"},{id:"print",date:"2004-01-06",title:"打印时的页边",body:"表格右边容易被打印机切掉。横向的登记单先选横向纸，普通信纸不要缩得太小。\n\n原件页码留在纸上。打印出来有几张，不代表原来就有几页。"},{id:"audio",date:"2004-01-06",title:"带盒与录音分开收",body:"带盒上的字、机器计数和听写稿分别登记。标签磨掉的地方不描新字。\n\n底噪仍留在录音里。听不清可以看听写稿；听写也有认不出的地方，不用一个顺口的词补进去。"},{id:"width",date:"2004-01-06",title:"显示与字号",body:"旧页的宽度各不相同。外面的目录可以随窗口变化，照片与原件各自留在页面中。\n\n右上角“设置”可以调整阅读字号。图片放大后仍看不清的字，请看旁边的文字转录。"},{id:"album",date:"2004-01-06",title:"相册索引卡",body:"春游相册第三袋的封面脱胶，已经换了一只纸袋。旧封面夹在里面，没有扔。\n\n合照背面只写了“操场”，没有日期。先按原袋顺序装回，不凭校服款式猜是哪一年。"},{id:"borrow",date:"2004-01-06",title:"借来的扫描仪",body:"扫描仪下周要还。透明板上有一道细划痕，竖着扫时会穿过正文。\n\n今天把纸横放又扫了一遍，两张都先存着。不是纸上多了一道笔画。"},{id:"address",date:"2004-01-06",title:"旧地址簿",body:"以前抄的几个网址现在都打不开了。地址簿还夹在光盘袋里。\n\n暂时不换成别的站点。别人接手了同一个地址，也不是原来那一页。"},{id:"envelope",date:"2004-01-06",title:"信封怎么放",body:"信封与里面的纸放在一起。邮戳能读清就抄下来，字迹糊了就只记月份。\n\n有些信只给家里看。做目录时可以登记存在，不等于要把内容摊在首页。"},{id:"book",date:"2004-01-06",title:"一本没有书皮的练习册",body:"数学练习册的封面找不到了，第一页写着一串答案，最后一页画了两只鞋。\n\n暂放“未辨认物件”袋。谁的、哪一年的，都还没问出来。"},{id:"copy",date:"2004-01-06",title:"给下一份副本",body:"如果再复制一份，请把说明和文件放在一起。不要只留下图片。\n\n损坏的链接可以标出来；没有找到的页面，也请让那个空位置留着。"},{id:"reply",date:"2004-01-06",title:"留言板只留存，不接新帖",body:"旧留言页只保存了当时留下的文字。输入框没有接回原站，提交按钮也不再使用。\n\n这次浏览者想留下的内容，会另列在后来的页面，不改旧帖的日期。"},{id:"lights",date:"2004-01-06",title:"照片底片袋",body:"底片袋上写着“阴天，没开闪光”。洗出来的几张比现场暗，靠窗的桌面又白了一块。\n\n先照原样保存。等找到另一套照片，再决定哪张适合放在目录旁边。"}],href:function(e,t){return"#/"+e+(t?"?"+t:"")},addr:function(e,t){return"archive.local"+(n.paths[e]||"/old4/missing.htm")+(t&&t.toString()?"?"+t.toString():"")},nav:function(e){return'<nav class="archive-nav" aria-label="镜像目录"><a href="#/home" '+("home"===e?'aria-current="page"':"")+'>目录首页</a><a href="#/directory">文件目录</a><a href="#/versions">快照 / 补录</a><a href="#/updates">新增往来</a><a href="#/about">保存说明</a></nav>'},footer:function(){var e=(location.hash||"#/boot").split("?")[0];return["#/about","#/ending"].includes(e)?'<footer class="archive-colophon"><span>原站快照　2003-11-14 23:47<br>首批补录　2004-01-06 · 后续往来另记日期</span><span>本地镜像 / 非在线校务系统<br><a href="#/about">保存范围</a>　abc studio · 虚构作品</span></footer>':'<footer class="archive-colophon compact-colophon"><p>原站快照　2003-11-14 23:47 · 本地镜像</p><p>首批补录　2004-01-06 · 后续往来另记日期 <a href="#/about">保存范围</a></p></footer>'},header:function(t){return'<header class="archive-mast"><a href="#/home" class="mast-mark" aria-label="旧四楼归档站首页">04<span>LOCAL COPY</span></a><div><p>槐岭中学 / 校友留存资料</p><h1>'+e(t||"旧四楼归档站")+'</h1><span>旧页照存。后来找到的，另放一处。</span></div><form class="site-search" action="#/search"><label for="site-query" class="visually-hidden">在镜像内检索</label><div><input id="site-query" name="q" placeholder="文件名、姓名或原话" maxlength="80"><button type="submit">查找</button></div></form></header>'},shell:function(e,t,a){return'<div class="portal-page">'+n.header(e)+n.nav(a)+'<div class="portal-content">'+t+"</div>"+n.footer()+"</div>"},wire:function(e){var t=e.querySelector(".site-search");t&&(t.onsubmit=function(e){e.preventDefault();var a=t.querySelector("input").value.trim();H4.go("#/search?q="+encodeURIComponent(a))})},home:function(t){var a=H4.state,r=!!a.flags.personalPagePublished;t.innerHTML=n.shell(r?"飞杳的留存页":"旧四楼归档站",'<div class="home-grid"><aside class="directory-rail"><h2>镜像 / 04</h2><p>原站已经关闭。<br>这份副本仍可浏览。</p><a href="#/snapshot">原站封面 <span>2003</span></a><a href="#/directory">留存目录 <span>2004</span></a><a href="#/versions">两次收存的说明</a><a href="#/updates">后来寄来的信</a><div class="rail-note">'+(2===a.cycle?"再次浏览<br>可以找第一次没取出的夹页。":"第28位访问者<br>记录仅存在本机。")+'</div></aside><section class="home-copy"><p class="eyebrow">最近一次整理 / 2004-01-06</p><h2>旧楼照片还在。</h2><p class="home-quiet">十三个人在同一张纸上签了名。<br>后来找到的值日记录和证言，都放进了目录。</p><figure class="index-photo"><img src="assets/bg_corridor.webp" alt="旧楼四楼的窗与走廊" width="960" height="640"><figcaption>旧楼页面附图 / 原文件名保留</figcaption></figure><div class="file-entry"><span class="file-number">01</span><div><button id="enter-corridor" class="plain-link">旧楼页面 / 四楼走廊</button><p>单页留存 · 可进入 · '+(a.corridor.p>0&&!a.flags.corridorDone?"上次停在第"+a.corridor.seg+"段":"含照片与现场记录")+'</p></div><span class="entry-status">HTM</span></div><div id="home-links" class="quick-files"></div>'+(r?'<div class="publication-link"><a href="#/personal">打开留下的照片与文章 →</a><p>这里可以看照片和作文，署名原件仍在目录里。</p></div>':'<a class="small-route" href="#/messages">飞杳的旧主页 / 一张院子里的照片 →</a>')+'<section class="maintenance-list"><h3>整理手记</h3>'+n.notes.slice(0,4).map(function(t){return'<a href="#/item?id='+t.id+'"><time>'+t.date+"</time>"+e(t.title)+"</a>"}).join("")+'<a href="#/directory?section=notes">其余手记与失效链接 →</a></section></section><aside class="home-secondary"><button class="avatar-box" id="avatar-box"><img src="assets/id_photo.webp" width="65" height="82" alt="飞杳的旧证件照"><span>飞杳 / 单页留存</span></button><h2>共同说明 / 关联人</h2><p class="catalog-note">姓名按原件顺序。<br>找到出处后可展开证言。</p><ul class="name-list">'+H4.data.NAMES.map(function(t){var n=H4.data.PROFILES[t];return'<li><button data-name="'+e(t)+'" class="name-item">'+e(t)+"<span>"+(H4.hasClue(n.unlock)?a.read.includes("p_"+t)?"已展开":"可展开":"待原件")+"</span></button></li>"}).join("")+'</ul><div class="side-attachment"><a href="#/footsteps">04 / 声音附件</a><p>封袋背面的字：<br>数清楚，再开门。</p></div><button id="slogan-left" class="plain-link marginal-rule">'+(r?'杳，不是杏。':'请勿回头数脚步声')+'</button>'+(r?'<p class="catalog-note old-slogan-note">旧页脚：请勿回头数脚步声</p>':'')+'</aside></div>',"home");var o=t.querySelector(".home-copy");o.insertBefore(o.querySelector(".file-entry"),o.querySelector(".index-photo")),H4.$("#enter-corridor").onclick=function(){a.flags.corridorDone&&(a.corridor={seg:1,p:0},a.flags.lookedThisRun=!1,H4.save()),H4.go("#/corridor")},H4.$("#avatar-box").onclick=function(){H4.go(r?"#/personal":"#/messages")},t.querySelectorAll("[data-name]").forEach(function(e){e.onclick=function(){H4.go("#/profile?n="+encodeURIComponent(e.dataset.name))}}),H4.$("#slogan-left").onclick=function(){H4.modal(r?{title:"飞杳的名字",bodyHTML:"<p>试广播那回，她说：“杳是树下面一个日。”</p><p>她的照片和作文放在个人页。</p>"}:{title:"原页边注",bodyHTML:"<p>两处标语的字迹不一样。后加的一笔很轻：</p><p>“我就在后面。”</p>"})},[["clue_classroom","纸面原件","archive"],["clue_duty","值班记录","duty"],["clue_storage","目录外的门","storage"],["clue_stairs_pass","旧梯记录","stairs"]].forEach(function(e){H4.hasClue(e[0])&&H4.$("#home-links").insertAdjacentHTML("beforeend",'<a href="#/'+e[2]+'">'+e[1]+"</a>")}),a.endingsSeen.some(function(e){return"e1"!==e})&&H4.$("#home-links").insertAdjacentHTML("beforeend",'<a class="new-correspondence" href="#/updates">新增往来 / 回信已入目录</a>'),n.wire(t)},directory:function(t,a){var r="notes"===a.get("section");t.innerHTML=n.shell("留存目录",'<p class="catalog-intro">可以查到文件存在，不代表已经读到其中的内容。纸面材料与后来来信分别列目。</p><div class="catalog-columns"><section><h2>01 / 原页与附件</h2><ul class="catalog-list"><li><a href="#/snapshot">2003-11-14 原站封面</a><span>只读快照</span></li><li><a href="#/corridor">旧楼页面</a><span>照片 / 场景</span></li><li><a href="#/messages">飞杳的主页</a><span>单页留存</span></li><li><a href="#/footsteps">04号声音附件</a><span>封存</span></li><li><a href="#/archive">纸面原件 / 共12件</a><span>2004补录</span></li><li><a href="#/updates">后来寄来的信</a><span>另列日期</span></li><li><a href="#/missing?from=school-mail">原站投稿信箱</a><span>链接失效</span></li></ul><h2>02 / 纸面目录</h2><div class="source-catalog">'+H4.data.ARCHIVE_FILES.map(function(t){return'<button class="catalog-source" data-catalog-source="'+t.id+'">'+e(t.title)+"<small>"+e(t.sub)+" · "+(H4.state.read.includes(t.id)?"已展开":"待展开")+"</small></button>"}).join("")+'</div></section><section id="maintenance-directory"><h2>03 / 整理手记</h2><ul class="catalog-list">'+n.notes.map(function(t){return'<li><a href="#/item?id='+t.id+'">'+e(t.title)+"</a><span>"+t.date.slice(5)+"</span></li>"}).join("")+"</ul></section></div>"),t.querySelectorAll("[data-catalog-source]").forEach(function(e){e.onclick=function(){H4.go("#/archive?file="+e.dataset.catalogSource)}}),n.wire(t),r&&H4.app.later(40,function(){H4.$("#maintenance-directory").scrollIntoView({block:"start"})})},item:function(t,a){var r=n.notes.find(function(e){return e.id===a.get("id")});r?(t.innerHTML=n.shell("整理手记",'<article class="maintenance-article"><p class="eyebrow">目录维护 / '+r.date+"</p><h2>"+e(r.title)+'</h2><p class="document-text">'+e(r.body)+'</p><p class="source-note">这是一则副本整理说明，不作为事故证据。</p><a href="#/directory?section=notes">返回整理手记</a></article>'),n.wire(t)):n.missing(t)},versions:function(e){e.innerHTML=n.shell("快照与补录",'<p class="catalog-intro">两个目录保存的是不同来源。补录没有倒写进2003年的页面。</p><div class="version-tabs"><a href="#/snapshot">打开2003快照</a><a href="#/directory">打开2004目录</a></div><div class="version-comparison"><article><p class="eyebrow">2003-11-14 / 23:47</p><h2>原站快照</h2><p>封面仍叫“校园怪谈网站”。飞杳的留言页、旧楼页面与附件入口留在原来的位置。</p><p>这是陈楼锁上相册的那个晚上。快照本身没有后来形成的调查结论与转学回函。</p><a href="#/snapshot">查看留存的封面 →</a></article><article><p class="eyebrow">2004-01-06 / 收存</p><h2>校友补录目录</h2><p>补入纸面原件、证言与录音残留。每件材料保留自己的日期；收存日期另列。</p><p>11月18日的事故调查存根、12月2日的回函，都在这一批材料中。它们没有在11月14日提前出现。</p><a href="#/directory">查看当前目录 →</a></article></div><section class="version-ledger"><h2>目录怎么变了</h2><table><caption>留存范围对照</caption><thead><tr><th>项目</th><th>2003快照</th><th>2004补录</th></tr></thead><tbody><tr><td>旧站封面与主页</td><td>原页留存</td><td>加目录，不改原文</td></tr><tr><td>纸面原件、访谈续页</td><td>不在快照内</td><td>按来源单列</td></tr><tr><td>后来寄来的信</td><td>无</td><td>随本次浏览另存</td></tr></tbody></table></section>'),n.wire(e)},snapshot:function(e){e.innerHTML='<div class="snapshot-banner"><a href="#/versions">← 快照说明</a><span>只读 / 2003-11-14 23:47</span><a href="#/home">返回2004目录</a></div><article class="old-snapshot"><p class="old-snapshot-code">HUAILING / 旧楼留存页</p><h1>校园怪谈网站</h1><p>今日开放：旧教学楼四楼</p><hr><a href="#/corridor">四楼走廊</a><a href="#/messages">飞杳的主页</a><a href="#/footsteps">04 / 声音附件</a><p class="snapshot-rule">请勿回头数脚步声</p><footer>原站已停止更新。此页按留存入口复排，原页文字照存。</footer></article>'},index:function(){var e=n.notes.map(function(e){return{title:e.title,text:e.body,sub:"整理手记 / "+e.date,url:"#/item?id="+e.id}});return H4.data.ARCHIVE_FILES.forEach(function(t){e.push({title:t.title,text:H4.state.read.includes(t.id)?t.content:"",sub:t.sub+" / "+(H4.state.read.includes(t.id)?"已展开原件":"目录条目，正文待展开"),url:"#/archive?file="+t.id})}),H4.data.NAMES.forEach(function(t){var a=H4.source("p_"+t);e.push({title:t+"的证言",text:H4.state.read.includes("p_"+t)?a.content:"",sub:H4.hasClue(H4.data.PROFILES[t].unlock)?"校友材料 / 可展开":"校友材料 / 待对应原件",url:"#/profile?n="+encodeURIComponent(t)})}),H4.state.read.filter(function(e){return/^(i_|m[12]$|b1$|tape_note_)/.test(e)}).forEach(function(t){var a=H4.source(t);a&&e.push({title:a.title,text:a.content,sub:a.sub||"已展开补录",source:t})}),e.push({title:"旧四楼 / 旧楼页面",text:"走廊 楼梯 照片",sub:"原站单页留存",url:"#/corridor"},{title:"飞杳的主页",text:H4.data.MESSAGES.join(" "),sub:"原站单页留存",url:"#/messages"}),e},search:function(t,a){var r=(a.get("q")||"").trim().slice(0,80),o=r?n.index().filter(function(e){return(e.title+" "+e.text+" "+e.sub).toLowerCase().includes(r.toLowerCase())}):[];t.innerHTML=n.shell("目录检索",'<p class="catalog-intro">索引范围：目录、整理手记和已展开的材料。未展开原件只检索题名；不会提前展示封存正文。</p><h2 class="search-count">'+(r?"“"+e(r)+"” / "+o.length+"项":"输入文件名、姓名或原话")+'</h2><div class="search-results">'+o.map(function(t,a){var n=t.text.toLowerCase().indexOf(r.toLowerCase()),o=n>=0?t.text.slice(Math.max(0,n-28),n+90):"";return"<article><span>"+String(a+1).padStart(2,"0")+"</span><div>"+(t.source?'<button class="plain-link" data-search-source="'+e(t.source)+'">'+e(t.title)+"</button>":'<a href="'+e(t.url)+'">'+e(t.title)+"</a>")+'<p class="result-meta">'+e(t.sub)+"</p>"+(o?"<p>"+e(o)+"</p>":"")+"</div></article>"}).join("")+(r&&!o.length?"<p>当前索引没有匹配项。可以换用文件题名，或先展开材料，再检索正文。</p>":"")+"</div>"),n.wire(t),t.querySelector("#site-query").value=r,t.querySelectorAll("[data-search-source]").forEach(function(e){e.onclick=function(){H4.openSource(e.dataset.searchSource)}})},updates:function(t){var a=H4.state.endingsSeen.filter(function(e){return["e2","e3","e4","e5"].includes(e)});t.innerHTML=n.shell("新增往来",'<p class="catalog-intro">旧快照不再更新。后来收到的回复放在这里，与当初留下的内容一起保存。</p><div class="incoming-list">'+(a.length?a.map(function(t){return'<article><p class="eyebrow">本次浏览之后 / '+("e4"===t?"私人留存":"2004年1月后续材料")+"</p><h2>"+e(H4.Endings.names[t])+"</h2><p>"+{e2:"副本传出去后，有人问起截图里没有留下的那一段。",e3:"通告有了读者，也有了要求补上出处的回信。",e4:"照片放回去了，家里的人还记得别的事情。",e5:"有人回信，也有人要求再说一次自己的那部分。"}[t]+'</p><a href="#/after?id='+t+'">展开后续来信 →</a></article>'}).join(""):"<p>这次浏览还没有收到回信。有人回信后，会在这里登记。</p>")+"</div>"+(2===H4.state.cycle&&7===H4.state.fragments.length?'<p><a href="#/mail">和照片一起寄来的两封信 →</a></p>':"")+'<a href="#/home">返回目录</a>'),n.wire(t)},about:function(e){e.innerHTML=n.shell("关于这份副本",'<article class="maintenance-article"><h2>保存范围</h2><p>这是一份2003年11月14日的旧站快照，和2004年1月6日开始补入的校友材料。原站页面、纸面原件、当事人回忆分别保留，不拼成一份没有来源的叙述。</p><p>可以点链接，也可以在地址栏输入目录里的 archive.local 地址。页面都从这份副本读取。</p><h2>浏览方法</h2><p>从目录进入旧楼。走廊里按 → 往前，按 ← 回头，按 Shift 侧身，也可以点画面上的按钮。脚步有画面提示，广播有听写稿。按 Alt+N 可以打开摘录夹。</p><p>阅读字号与动态效果可在设置中调整。进度保存在当前浏览器，换设备后需重新浏览。浏览器阻止本地存储时，状态栏会提示。</p><h2>作者的话</h2><p>写到最后，我总想起图书室那张借阅单。她请人替她留一本书，说下周五还来。</p><p>作品中的人物与学校均为虚构。事故前最后几分钟的记录留空。</p><p class="source-note">abc studio / 网页与程序为本作制作；场景使用生成后整理的位图素材。字体许可见<a class="font-license" href="assets/fonts-LICENSE.txt" target="_blank" rel="noopener">随附字体说明</a>。所有页面可离线使用。</p></article>'),n.wire(e)},missing:function(e){e.innerHTML=n.shell("链接没有一同保存",'<article class="maintenance-article"><p class="eyebrow">本地副本 / 未找到页面</p><h2>目录还在，文件没有跟来。</h2><p>旧站的校外页面与投稿服务没有打包。这里不会跳到其他网站。</p><p>已收好的材料与本机进度仍在。</p><a href="#/directory">回到文件目录</a>　<a href="#/home">目录首页</a></article>'),n.wire(e)},decorate:function(t,a,r){if(H4.$("#address").value=n.addr(a,r),H4.$("#title-text").textContent=(n.labels[a]||"链接失效")+" — 旧四楼归档站",t.dataset.route=a,t.setAttribute("tabindex","-1"),!t.querySelector(".portal-page")&&"boot"!==a){var o=document.createElement("nav");o.className="route-crumb",o.setAttribute("aria-label","当前位置"),o.innerHTML='<a href="#/home">旧四楼归档站</a><span>/ '+e(n.labels[a]||"链接失效")+'</span><a href="#/directory">目录</a><a href="#/versions">来源 / 日期</a>',t.prepend(o);var i=document.createElement("div");i.innerHTML=n.footer(),t.appendChild(i.firstChild)}if("archive"===a&&r.get("file")){var s=H4.data.ARCHIVE_FILES.find(function(e){return e.id===r.get("file")});s&&(H4.G.archive.selected=s.id,H4.G.archive.read(s))}if("directory"===a&&H4.hasClue("clue_storage")){var l=document.createElement("section");l.className="unlisted-record",l.innerHTML='<p class="eyebrow">本次浏览 / 目录外路径</p><h2><a href="#/storage">building/extra.htm</a></h2><p>你已经到过这里。2003年的留存入口中，没有找到这道门。</p><p class="source-note">这是一条浏览记录，不作为事故证据。</p>',t.querySelector(".portal-content").appendChild(l)}if("profile"===a){var c=t.querySelector(".source-note");c&&(c.textContent="陈楼"===r.get("n")?"2004-01-06收存 / 本页为陈楼本人的陈述，由其随其他证言一并整理。原话与补问分开保留，均可与原件对照。":"2004-01-06收存 / 整理者：陈楼。原证言与续页分开保留；逐条确认情况见续页附记。")}t.querySelectorAll("img:not([alt])").forEach(function(e){e.alt="留存图片"}),t.querySelectorAll(".catalog-source").forEach(function(e){e.setAttribute("type","button")}),n.layout(),H4.$("#route-announcement").textContent=n.labels[a]||"链接失效",H4.$("#modal-root").children.length||"archive"===a&&H4.G.archive.looking||t.focus({preventScroll:!0})},layout:function(){var e=n.readingSize||Number(t("h4_reading_size"));[100,115,130].includes(e)||(e=100),document.documentElement.style.setProperty("--reading",String(e/100)),document.documentElement.style.setProperty("--original-reading","1"===t("h4_original_scale")?String(e/100):"1"),H4.$("#xp-sizer").style.cssText="",H4.$("#xp-win").style.transform="none"},routes:{}};["directory","item","versions","snapshot","search","updates","about"].forEach(function(e){n.routes[e]=n[e]}),H4.app.renderHome=n.home;var r={c1:{options:["共同说明中的离楼时间与巡逻记录相冲突","巡逻记录足以排除其余十人后来返回","记录确认三人22:40还在四楼，坠落时谁在场仍不清楚","共同说明整份作废，其中每件事都不再需要核对"],answers:[0,2]},c2:{options:["K4的借用人就是事故发生时的最后持有人","交班清点与张耀兰所称的归还时间冲突","L4已经归还，足以证明K4也在值班室","K4最终交给谁，仍缺直接交接记录"],answers:[1,3]},c3:{options:["现有材料排除了证明所称的正常转学","证明形成于快照之后，仅凭这一点就能确认伪造人","槐川中学没接收过她，可以据此认定十三人共同伪造","这些材料仍不能确认是谁作出了转学处理"],answers:[0,3]},c4:{options:["于祯的说法足以确认张耀主是最后接触者","两份具名说法对张耀主是否进过天台直接冲突","谁在坠落前最后几分钟仍在场，尚不能确认","一人的否认有矛盾，可以直接认定另一人的全部回忆"],answers:[1,2]},c5:{options:["现场补记写了护栏缺口，与对外所说的“护栏完整”有出入","未找到翻越痕迹，足以排除一切意外可能","护栏有缺口，足以确认坠落发生在缺口处","实际坠落方式与最后接触者仍待核实"],answers:[0,3]}};H4.data.CONTRADICTION_PAIRS.forEach(function(e){e.scope=r[e.id]});var o=H4.app.settings;H4.app.settings=function(){o();var e=H4.$(".xp-modal-body"),r=document.createElement("p");r.innerHTML='<label for="reading-size">阅读字号</label> <select id="reading-size"><option value="100">标准</option><option value="115">加大 115%</option><option value="130">更大 130%</option></select>',e.appendChild(r);var i=document.createElement("p");i.className="reading-scope-note",i.innerHTML='字号会应用到归档页和听写稿。原站默认用原来的字号。<br><label><input type="checkbox" id="original-reading-scale"> 原站也采用阅读字号</label>',e.appendChild(i);var s=i.querySelector("input");s.checked="1"===t("h4_original_scale"),s.onchange=function(){a("h4_original_scale",s.checked?"1":"0"),n.layout()};var l=r.querySelector("select");l.value=t("h4_reading_size")||"100",l.onchange=function(){n.readingSize=Number(l.value),a("h4_reading_size",l.value),n.layout()};var c=H4.$(".xp-modal-buttons button"),d=c.onclick;c.onclick=function(e){a("h4_motion_choice","manual"),d.call(this,e)}};var i=H4.G.archive.read;H4.G.archive.read=function(e){if(i.call(this,e),!e.locked||H4.hasClue(e.locked)){var t=H4.$("#paper-reader"),a=document.createElement("p");a.className="reader-provenance",a.textContent="纸面原件 / 2004-01-06收存 · 成文或登记日期见原件",t.prepend(a)}};var s=H4.G.archive.read;H4.G.archive.read=function(e){s.call(this,e);var t=H4.$("#paper-reader");if(t){t.dataset.paper=e.id;var a=H4.data.ARCHIVE_FILES.findIndex(function(t){return t.id===e.id}),n=H4.data.ARCHIVE_FILES[a+1],r=document.createElement("button");r.className="paper-turn",r.type="button",r.textContent=n?"翻到下一份 →":"已到末件 · 返回目录",r.setAttribute("aria-label",n?"翻到下一份原件："+n.title:"返回原件目录"),r.onclick=function(){n?(H4.G.archive.selected=n.id,H4.G.archive.read(n),t.scrollTop=0,t.focus({preventScroll:!0})):H4.$("#file-tree").querySelector("button").focus()},t.appendChild(r),t.setAttribute("tabindex","-1")}},n.waiting=function(t,a,r,o){t.innerHTML=n.shell("待收存页面",'<article class="waiting-record"><p class="eyebrow">入口仍保留 / 内容尚未开放</p><h2>'+e(a)+"</h2><p>"+e(r)+'</p><div class="page-links">'+o.map(function(t){return'<a href="#/'+t[0]+'">'+e(t[1])+"</a>"}).join("")+"</div></article>"),n.wire(t)};var l=H4.Endings.choose;H4.Endings.choose=function(e){if("stay"===e&&(2!==H4.state.cycle||7!==H4.state.fragments.length||5!==H4.state.contradictions.length))return["a2","a6"].every(function(e){return H4.state.read.includes(e)})?void H4.Endings.start("e4"):void H4.modal({title:"先认识照片里的她",bodyHTML:"<p>图书室借阅单与《槐花》作业里，留着她自己想做的事。先去读读，再回来留下这句话。</p>",buttons:[{label:"查看纸面目录",onClick:function(){H4.go("#/archive")}},{label:"暂时收好"}]});l.call(this,e)};var c=H4.Endings.library;H4.Endings.library=function(){c.call(this);var e=H4.$("#ending-records");e.className="ending-grid",e.querySelectorAll("button").forEach(function(e,t){e.disabled&&(e.textContent="？ / "+["转身离开这次浏览","留下可复核的原件","留下简要的公开说明","记住她的日常","再次浏览，整理照片与来信"][t])})},window.addEventListener("DOMContentLoaded",function(){var a=document.createElement("span");a.id="route-announcement",a.className="sr-only",a.setAttribute("aria-live","polite"),document.body.appendChild(a),!t("h4_motion_choice")&&matchMedia("(prefers-reduced-motion: reduce)").matches&&(H4.state.reduced=!0,document.body.classList.add("reduced"),H4.save());var r=H4.$("#address");r.onkeydown=function(e){if("Enter"===e.key){var t=r.value.trim().replace(/^https?:\/\//,"").replace(/^archive\.local/,""),a=t.split("?")[0],o=t.split("?").slice(1).join("?"),i=Object.keys(n.paths).find(function(e){return n.paths[e]===a});H4.go("#/"+(i||"missing")+(o?"?"+o:""))}},H4.$("#btn-max").textContent="字",H4.$("#btn-max").title="调整阅读字号",H4.$("#btn-max").setAttribute("aria-label","调整阅读字号"),H4.$("#btn-max").onclick=H4.app.settings;var o=document.createElement("button");o.id="menu-source",o.textContent="来源",o.onclick=function(){H4.go("#/versions")},H4.$("#menubar").insertBefore(o,H4.$("#menu-settings"));var i=document.createElement("button");i.textContent="页源",i.id="menu-page-source",i.onclick=function(){H4.$("#screen").dataset.route;var t=H4.$("#screen").cloneNode(!0);t.querySelectorAll("input,textarea").forEach(function(e){e.removeAttribute("value"),e.textContent=""});var a="\x3c!-- 当前本地页面的渲染副本；用于查看结构，不是2003年服务器源码。 --\x3e\n\x3c!-- 来源日期请见各原件；本窗口不增加线索。 --\x3e\n"+t.innerHTML;H4.modal({title:"当前页源 / 本地渲染副本",bodyHTML:'<pre class="source-code">'+e(a)+"</pre>"})},H4.$("#menubar").insertBefore(i,H4.$("#menu-settings"))})}();
+(() => {
+  "use strict";
+  const e = H4.esc;
+  const schoolRoot = "http://www.huailing-middle.edu.cn/space/old4/";
+  const t = key => {
+    try { return localStorage.getItem(key); } catch (_) { return null; }
+  };
+  const a = (key, value) => {
+    try { localStorage.setItem(key, value); }
+    catch (_) { H4.notice("本机无法保存设置，本次浏览仍可使用。"); }
+  };
+  const link = (href, text) => '<a href="' + e(href) + '">' + e(text) + '</a>';
+  const text = body => body.split("\n\n").map(p => "<p>" + e(p) + "</p>").join("");
+  const notes = [
+    ["disk", "这些网页是怎么留下的", "这些网页是去年秋天留下的。后来找到几页，我放在后头，写了收到的日子，原来的字没改。\n\n校里的信箱已经不收信了。想找借书和作息，去校园网的常用资料那页。"],
+    ["names", "文件名照旧", "有的照片写着名字，有的只写了号码。我照原来的叫法放。同名的翻开比过，内容一样的只留一张。"],
+    ["photo", "相片的边", "几张相片在相册里压久了，边上发白。我没裁掉。背面有字的另拍一张，别把那行铅笔字印在人脸上。"],
+    ["link", "打不开的网址", "有几个网址还能从旧网页里抄下来，点进去却没了。地址我留着，免得以后再看到，还以为少抄了一个字。"],
+    ["clock", "日子照纸上写的", "往光盘里拷一遍，电脑就把几个文件都记成同一天了。纸上有日期的照纸抄；没有日期的，我只写哪天拿到。"],
+    ["print", "打印时记得看右边", "我用教室的打印机试过，借还表最后一格容易切掉。印那张表的时候把纸横过来。"],
+    ["audio", "带盒上的字", "带盒磨掉了一块。我听了两遍还是没认出是谁在说话，先空着。录音里那点杂音也还在。"],
+    ["width", "字太小的时候", "有些旧页在学校的电脑上正好能看，回家就得拉滚动条。字太小可以去设置里调。图片上的字看不清，旁边有照着抄的一份。"],
+    ["album", "相册第三袋", "春游照片那袋脱胶了，换了一只纸袋，旧封面还夹在里头。合照背面只写着‘操场’，我也记不准是哪一年。"],
+    ["borrow", "借来的扫描仪", "扫描仪下周得还。玻璃上有一道划痕，竖着扫时正好穿过正文。今天把纸转过来重扫了一张，原纸上没有那一笔。"],
+    ["address", "旧地址簿", "以前抄的网址打不开了，地址簿还夹在光盘袋里。同一个地址现在有人在用，也不是以前那个网页了。"],
+    ["envelope", "信和信封", "信和信封放在一起。邮戳能看清就抄下来，糊了就只记月份。写给家里看的那几句话，我没有搬到首页。"],
+    ["book", "一本没有书皮的练习册", "第一页写着一串答案，最后一页画了两只鞋。封面没找到，还没问出是谁的。"],
+    ["copy", "给以后拷走这些网页的人", "拷图片的时候，把图片底下那几行字也带走。哪一页没有找到就空着，以后要是找到了，再把它放回去。"],
+    ["reply", "留言还看得见", "以前写的留言都还在，这里已经不能再发了。后来有人回信，我把它放到来信那一页，没改旧帖的日期。"],
+    ["lights", "底片袋上写着阴天", "底片袋上写着‘阴天，没开闪光’。洗出来的几张都暗，倒是靠窗的桌面白了一块。等另外那卷洗出来再挑。"]
+  ].map(([id,title,body]) => ({id,title,body,date:"2004-01-06"}));
+
+  function paginate(items, size, params) {
+    const pages = Math.max(1, Math.ceil(items.length / size));
+    const value = Number(params.get("page"));
+    const page = Number.isSafeInteger(value) ? Math.min(pages, Math.max(1, value)) : 1;
+    return {items:items.slice((page - 1) * size, page * size), page, pages};
+  }
+  function pager({page, pages}, href) {
+    if (pages === 1) return "";
+    return '<nav class="plain-pager" aria-label="翻页">' +
+      (page > 1 ? link(href(page - 1), "上一页") : "<span>上一页</span>") +
+      '<span>第 ' + page + ' / ' + pages + ' 页</span>' +
+      (page < pages ? link(href(page + 1), "下一页") : "<span>下一页</span>") + "</nav>";
+  }
+  function listTable(rows) {
+    return '<table class="campus-list"><thead><tr><th scope="col">日期</th><th scope="col">内容</th></tr></thead><tbody>' +
+      rows.map(([date, href, label]) => '<tr><td>' + e(date) + '</td><td>' + link(href,label) + '</td></tr>').join("") +
+      '</tbody></table>';
+  }
+  const n = H4.Portal = {
+    schoolRoot,
+    paths: {
+      "scene-notes":"views/notes.htm",
+      directory:"photos/list.htm", item:"notes/read.htm", versions:"notes/dates.htm",
+      search:"search/all.htm", updates:"letters/list.htm", about:"notes/about.htm",
+      corridor:"building/corridor.htm", stairs:"building/stairs.htm", basement:"building/b1.htm",
+      rooftop:"building/roof.htm", archive:"classroom/papers.htm", duty:"building/duty.htm",
+      warehouse:"building/store.htm", storage:"building/extra.htm", radio:"radio/tape.htm",
+      footsteps:"radio/04.htm", profile:"classroom/people.htm", mail:"letters/envelope.htm",
+      personal:"users/feiyao-later.htm", after:"letters/reply.htm", record:"classroom/account.htm",
+      ending:"visit/end.htm", missing:"missing.htm"
+    },
+    labels: {
+      "scene-notes":"现场附记",
+      directory:"旧楼照片", item:"陈楼的手记", versions:"网站说明", snapshot:"校园网 2003",
+      school:"槐岭中学校园网", search:"站内搜索", updates:"后来寄来的信", about:"关于本站",
+      corridor:"四楼走廊", stairs:"楼梯间", basement:"地下室", rooftop:"天台门边",
+      archive:"教室里的纸", duty:"值班室", warehouse:"后勤仓库", storage:"储物间",
+      radio:"广播室那盘旧录音", footsteps:"门外的录音（04）", profile:"一起值日的同学后来怎么说",
+      mail:"后来寄来的信", personal:"后来放回来的照片和作文", after:"后来收到的回信",
+      record:"查证说明", ending:"本次浏览", missing:"页面没有找到"
+    },
+    notes,
+    addr(route, params) {
+      return schoolRoot + (n.paths[route] || n.paths.missing) + (params?.size ? "?" + params.toString() : "");
+    },
+    nav() {
+      return '<nav class="campus-return" aria-label="页面导航">' + link("#/home","返回首页") +
+        '<button type="button" data-return>返回上一页</button></nav>';
+    },
+    footer() {
+      return '<footer class="campus-footer">' + link("#/about","关于本站") +
+        '<span>槐岭中学校园网　2003</span></footer>';
+    },
+    header(title) {
+      return '<header class="campus-heading"><h1>' + e(title || "槐岭中学校园网") + '</h1></header>';
+    },
+    shell(title, content) {
+      return '<div class="portal-page campus-web">' + n.nav() + n.header(title) +
+        '<div class="portal-content">' + content + '</div>' + n.footer() + '</div>';
+    },
+    wire(root) {
+      root.querySelectorAll("[data-return]").forEach(button => {
+        button.onclick = () => {
+          if (H4.app.history.length) H4.$("#menu-back").click();
+          else H4.go("#/home");
+        };
+      });
+      const form = root.querySelector(".site-search");
+      if (form) form.onsubmit = event => {
+        event.preventDefault();
+        const query = form.querySelector("input").value.trim();
+        H4.go("#/search" + (query ? "?q=" + encodeURIComponent(query) : ""));
+      };
+    },
+    directory(root, params) {
+      const section = params.get("section");
+      if (section === "notes") {
+        const listing = paginate(notes, 8, params);
+        root.innerHTML = n.shell("陈楼的手记", "<p>照片、录音和后来找到的几页纸，我另写了几行来历。</p>" +
+          listTable(listing.items.map(note => [note.date, "#/item?id=" + note.id, note.title])) +
+          pager(listing, page => "#/directory?section=notes&page=" + page));
+      } else if (section === "daily") {
+        root.innerHTML = n.shell("学校日常", "<p>作息、校服和借书的事，去学校各栏看。</p><ul>" +
+          [["notices","办事通知"],["news","校园近况"],["board","家校留言"],["services","常用资料"]].map(([key,title]) =>
+            '<li>' + link("#/school?section=" + key,title) + '</li>').join("") + "</ul>");
+      } else {
+        const photos = [
+          ["2003年秋","#/school?section=building","旧教学楼，教室和过道"],
+          ["2003年11月","#/corridor","四楼走廊"],
+          ["2003年11月","#/album","林杳相册里的楼顶照片"],
+          ["1999年春","#/album","外婆家的院子"]
+        ];
+        if (H4.hasClue("clue_storage")) photos.push(["日期未记","#/storage","贴着封条的那道门"]);
+        root.innerHTML = n.shell("旧楼照片", "<p>旧教学楼这几张，按相册上的日期放。走廊的原图有好几张，可以接着看。</p>" +
+          listTable(photos) + '<p class="campus-related">' + link("#/archive","教室里的纸") + '　' +
+          link("#/directory?section=notes","陈楼的手记") + '　' + link("#/search","站内搜索") + '</p>');
+      }
+      n.wire(root);
+    },
+    item(root, params) {
+      const index = notes.findIndex(note => note.id === params.get("id"));
+      if (index < 0) return n.missing(root);
+      const note = notes[index];
+      root.innerHTML = n.shell("陈楼的手记", '<article class="maintenance-article"><h2>' + e(note.title) +
+        '</h2><p class="campus-date">陈楼　' + note.date + '</p>' + text(note.body) +
+        '<p class="campus-related">' +
+        [notes[index - 1], notes[index + 1]].map((next, i) => next ?
+          link("#/item?id=" + next.id,(i ? "下一篇：" : "上一篇：") + next.title) : "").filter(Boolean).join("　") +
+        '　' + link("#/directory?section=notes","全部手记") + '</p></article>');
+      n.wire(root);
+    },
+    index() {
+      const read = H4.state.read;
+      const entries = notes.map(note => ({title:note.title,text:note.body,sub:"陈楼　" + note.date,url:"#/item?id=" + note.id}));
+      for (const file of H4.data.ARCHIVE_FILES) {
+        const visible = read.includes(file.id) && (!file.locked || H4.hasClue(file.locked));
+        entries.push({title:file.title,text:visible ? file.content : "",sub:file.sub,url:"#/archive?file=" + file.id});
+      }
+      for (const name of H4.data.NAMES) {
+        const id = "p_" + name;
+        entries.push({title:name + "说的话",text:read.includes(id) && H4.hasClue(H4.data.PROFILES[name].unlock) ?
+          H4.source(id).content : "",sub:"一起值日的同学",url:"#/profile?n=" + encodeURIComponent(name)});
+      }
+      for (const id of read.filter(value => /^(i_|m[12]$|b1$|tape_note_)/.test(value))) {
+        const source = H4.source(id);
+        if (source) entries.push({title:source.title,text:source.content,sub:source.sub || "教室里的纸",source:id});
+      }
+      entries.push({title:"四楼走廊",text:"走廊 楼梯 照片",sub:"旧楼照片",url:"#/corridor"},
+        {title:"林杳的留言",text:H4.data.MESSAGES.join(" "),sub:"林杳同学",url:"#/messages?entry=old"});
+      return entries;
+    },
+    search(root, params, unavailable = false) {
+      const query = (params.get("q") || "").trim().slice(0,80);
+      const key = query.toLowerCase();
+      const found = key ? n.index().filter(row => (row.title + " " + row.text + " " + row.sub).toLowerCase().includes(key)) : [];
+      const listing = paginate(found, 8, params);
+      const results = listing.items.map(row => {
+        const index = row.text.toLowerCase().indexOf(key);
+        const excerpt = index < 0 ? "" : row.text.slice(Math.max(0,index - 22), index + 47);
+        return '<li>' + (row.source ? '<button type="button" class="plain-link" data-search-source="' + e(row.source) +
+          '">' + e(row.title) + '</button>' : link(row.url,row.title)) +
+          '<span class="campus-date">　' + e(row.sub) + '</span>' + (excerpt ? '<p>' + e(excerpt) + '</p>' : "") + '</li>';
+      }).join("");
+      root.innerHTML = n.shell("站内搜索", '<form class="site-search" action="#/search"><label for="site-query">搜索本站</label> ' +
+        '<input id="site-query" name="q" maxlength="80" placeholder="姓名、题名或记得的一句话"> <button type="submit">搜索</button></form>' +
+        (unavailable ? "<p>学校栏目暂时读不到，以下是本站结果。</p>" : "") +
+        '<div class="search-results">' + (key ? '<p>找到 ' + found.length + ' 条。</p>' +
+          (results ? '<ol class="campus-results">' + results + '</ol>' : "<p>没找到。可以换个短些的词试试。</p>") +
+          pager(listing, page => "#/search?q=" + encodeURIComponent(query) + "&page=" + page) :
+          '<p>可以搜“借阅”或人名，也可以直接看' + link("#/school?section=notices","学校通知") + '。</p>') + '</div>');
+      root.querySelector("#site-query").value = query;
+      root.querySelectorAll("[data-search-source]").forEach(button => {
+        button.onclick = () => H4.openSource(button.dataset.searchSource);
+      });
+      n.wire(root);
+    },
+    updates(root) {
+      const visited = H4.state.endingsSeen.filter(id => ["e2","e3","e4","e5"].includes(id));
+      const rows = visited.map(id => {
+        const pack = H4.Aftermath.pack(id);
+        return [pack.date.split(" / ")[0],"#/after?id=" + id,pack.title];
+      });
+      root.innerHTML = n.shell("后来寄来的信", "<p>照片放回去以后，又有几个人写了信。每封照写信人的日期放在这里。——陈楼</p>" +
+        (rows.length ? listTable(rows) : "<p>暂时没有新来信。</p>") +
+        (H4.state.cycle === 2 && H4.state.fragments.length === 7 ?
+          '<p>' + link("#/mail","和照片一起寄来的两封信") + '</p>' : ""));
+      n.wire(root);
+    },
+    about(root) {
+      root.innerHTML = n.shell("关于本站", '<article class="maintenance-article"><p>这些网页是2003年秋天留下的。后来找到的几页，我加在后面，标了拿到的日子。原来的字没有改。</p>' +
+        '<p>有几张纸能对得上，也有几个人说的不一样。到天台那晚最后几分钟，没有一张纸写清楚。你看到两种说法的时候，都先留着。</p>' +
+        '<p class="campus-date">陈楼　2004-01-06</p><p>' + link("#/directory?section=notes","我写的几条手记") + '　' +
+        link("#/snapshot","校园网 2003") + '</p><p class="campus-date">虚构作品 · abc studio</p></article>');
+      n.wire(root);
+    },
+    missing(root) {
+      root.innerHTML = n.shell("页面没有找到", '<p>这个地址已经打不开了。可以从' +
+        link("#/snapshot","校园网首页") + '重新找，也可以回' + link("#/home","林杳同学") + '。</p>');
+      n.wire(root);
+    },
+    decorate(root, route, params) {
+      H4.$("#address").value = n.addr(route, params);
+      H4.$("#title-text").textContent = (n.labels[route] || n.labels.missing) + " — 槐岭中学校园网";
+      root.dataset.route = route;
+      root.tabIndex = -1;
+      if (!root.querySelector(".portal-page")) root.insertAdjacentHTML("afterbegin", n.nav());
+      if (route === "archive" && params.has("file")) {
+        const file = H4.data.ARCHIVE_FILES.find(entry => entry.id === params.get("file"));
+        if (file) {
+          H4.G.archive.selected = file.id;
+          H4.G.archive.read(file);
+        }
+      }
+      n.wire(root);
+      n.layout();
+      H4.$("#route-announcement").textContent = n.labels[route] || n.labels.missing;
+      if (!H4.$("#modal-root").children.length && !(route === "archive" && H4.G.archive.looking)) {
+        root.focus({preventScroll:true});
+      }
+    },
+    layout() {
+      const saved = n.readingSize || Number(t("h4_reading_size"));
+      const scale = [100,115,130].includes(saved) ? saved : 100;
+      document.documentElement.style.setProperty("--reading", String(scale / 100));
+      document.documentElement.style.setProperty("--original-reading", t("h4_original_scale") === "1" ? String(scale / 100) : "1");
+      H4.$("#xp-sizer").style.cssText = "";
+      H4.$("#xp-win").style.transform = "none";
+    },
+    routes:{}
+  };
+  for (const route of ["directory","item","search","updates","about"]) n.routes[route] = n[route];
+  n.routes.versions = n.about;
+var r={c1:{options:["共同说明中的离楼时间与巡逻记录相冲突","巡逻记录足以排除其余十人后来返回","记录确认三人22:40还在四楼，坠落时谁在场仍不清楚","共同说明整份作废，其中每件事都不再需要核对"],answers:[0,2]},c2:{options:["K4的借用人就是事故发生时的最后持有人","交班清点与张耀兰所称的归还时间冲突","L4已经归还，足以证明K4也在值班室","K4最终交给谁，仍缺直接交接记录"],answers:[1,3]},c3:{options:["现有材料排除了证明所称的正常转学","证明比那天的网页晚，仅凭这一点就能确认伪造人","槐川中学没接收过她，可以据此认定十三人共同伪造","这些材料仍不能确认是谁作出了转学处理"],answers:[0,3]},c4:{options:["于祯的说法足以确认张耀主是最后接触者","两份具名说法对张耀主是否进过天台直接冲突","谁在坠落前最后几分钟仍在场，尚不能确认","一人的否认有矛盾，可以直接认定另一人的全部回忆"],answers:[1,2]},c5:{options:["现场补记写了护栏缺口，与对外所说的“护栏完整”有出入","未找到翻越痕迹，足以排除一切意外可能","护栏有缺口，足以确认坠落发生在缺口处","实际坠落方式与最后接触者仍待核实"],answers:[0,3]}};H4.data.CONTRADICTION_PAIRS.forEach(function(e){e.scope=r[e.id]});var o=H4.app.settings;H4.app.settings=function(){o();var e=H4.$(".xp-modal-body"),r=document.createElement("p");r.innerHTML='<label for="reading-size">阅读字号</label> <select id="reading-size"><option value="100">标准</option><option value="115">加大 115%</option><option value="130">更大 130%</option></select>',e.appendChild(r);var i=document.createElement("p");i.className="reading-scope-note",i.innerHTML='字号会应用到本站页面和听写稿。原站默认用原来的字号。<br><label><input type="checkbox" id="original-reading-scale"> 原站也采用阅读字号</label>',e.appendChild(i);var s=i.querySelector("input");s.checked="1"===t("h4_original_scale"),s.onchange=function(){a("h4_original_scale",s.checked?"1":"0"),n.layout()};var l=r.querySelector("select");l.value=t("h4_reading_size")||"100",l.onchange=function(){n.readingSize=Number(l.value),a("h4_reading_size",l.value),n.layout()};};n.installArchiveHooks=function(){
+  const archive=H4.G.archive;
+  const read=archive.read;
+  archive.read=function(file){
+    read.call(this,file);
+    const reader=H4.$("#paper-reader");
+    if(!reader)return;
+    if(!file.locked||H4.hasClue(file.locked)){
+      const provenance=document.createElement("p");
+      provenance.className="reader-provenance";
+      provenance.textContent="教室里的纸 / 2004年1月6日放回 · 日期照纸上所写";
+      reader.prepend(provenance);
+    }
+    reader.dataset.paper=file.id;
+    const index=H4.data.ARCHIVE_FILES.findIndex(entry=>entry.id===file.id);
+    const next=H4.data.ARCHIVE_FILES[index+1];
+    const turn=document.createElement("button");
+    turn.className="paper-turn";
+    turn.type="button";
+    turn.textContent=next?"翻到下一份 →":"已到末件 · 返回目录";
+    turn.setAttribute("aria-label",next?"翻到下一份原件："+next.title:"返回原件目录");
+    turn.onclick=()=>{
+      if(!next){H4.$("#file-tree").querySelector("button").focus();return;}
+      archive.selected=next.id;
+      archive.read(next);
+      reader.scrollTop=0;
+      reader.focus({preventScroll:true});
+    };
+    reader.appendChild(turn);
+    reader.setAttribute("tabindex","-1");
+  };
+},n.waiting=function(t,a,r,o){t.innerHTML=n.shell("待保存页面",'<article class="waiting-record"><p class="eyebrow">入口仍保留 / 内容尚未开放</p><h2>'+e(a)+"</h2><p>"+e(r)+'</p><div class="page-links">'+o.map(function(t){return'<a href="#/'+t[0]+'">'+e(t[1])+"</a>"}).join("")+"</div></article>"),n.wire(t)};var l=H4.Endings.choose;H4.Endings.choose=function(e){if("stay"===e&&(2!==H4.state.cycle||7!==H4.state.fragments.length||5!==H4.state.contradictions.length))return["a2","a6"].every(function(e){return H4.state.read.includes(e)})?void H4.Endings.start("e4"):void H4.modal({title:"先认识照片里的她",bodyHTML:"<p>图书室借阅单与《槐花》作业里，留着她自己想做的事。先去读读，再回来留下这句话。</p>",buttons:[{label:"查看教室里的纸",onClick:function(){H4.go("#/archive")}},{label:"暂时收好"}]});l.call(this,e)};var c=H4.Endings.library;H4.Endings.library=function(){c.call(this);var e=H4.$("#ending-records");e.className="ending-grid",e.querySelectorAll("button").forEach(function(e,t){e.disabled&&(e.textContent="？ / "+["转身离开这次浏览","留下可复核的原件","留下简要的公开说明","记住她的日常","再次浏览，整理照片与来信"][t])})},window.addEventListener("DOMContentLoaded",function(){var a=document.createElement("span");a.id="route-announcement",a.className="sr-only",a.setAttribute("aria-live","polite"),document.body.appendChild(a);H4.$("#btn-max").textContent="字",H4.$("#btn-max").title="调整阅读字号",H4.$("#btn-max").setAttribute("aria-label","调整阅读字号"),H4.$("#btn-max").onclick=H4.app.settings;var o=document.createElement("button");o.id="menu-source",o.textContent="来源",o.onclick=function(){H4.go("#/versions")},H4.$("#menubar").insertBefore(o,H4.$("#menu-settings"));var i=document.createElement("button");i.textContent="页源",i.id="menu-page-source",i.onclick=function(){H4.$("#screen").dataset.route;var t=H4.$("#screen").cloneNode(!0);t.querySelectorAll("input,textarea").forEach(function(e){e.removeAttribute("value"),e.textContent=""});var a="\x3c!-- 当前页的 HTML，仅供查看网页结构。 --\x3e\n\x3c!-- 来源日期请见各原件；本窗口不增加线索。 --\x3e\n"+t.innerHTML;H4.modal({title:"当前网页的源代码",bodyHTML:'<pre class="source-code">'+e(a)+"</pre>"})},H4.$("#menubar").insertBefore(i,H4.$("#menu-settings"))})})();

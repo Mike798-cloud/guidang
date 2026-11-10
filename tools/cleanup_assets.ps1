@@ -34,7 +34,13 @@ try {
         'assets/fonts/archive-evidence-v2.woff2', 'assets/fonts/archive-extra-v2.woff2',
         'assets/audio/tape01.wav', 'assets/audio/tape02.wav', 'assets/audio/tape03.wav',
         'assets/audio/tape04.wav', 'assets/audio/tape05.wav', 'assets/audio/tape06.wav',
-        'css/portal.css'
+        'css/portal.css', 'js/catalog_index.js',
+        'assets/bg_corridor.webp', 'assets/room_dim.jpg', 'assets/reading_sheet.webp',
+        'assets/duty_ledger.webp', 'assets/paper-fibre.svg', 'assets/fonts-LICENSE.txt',
+        'assets/fonts/archive-catalog-v3.woff2', 'assets/fonts/archive-core-v3.woff2',
+        'assets/fonts/archive-evidence-v3.woff2', 'assets/fonts/archive-extra-v3.woff2',
+        'assets/fonts/archive-original-v3.woff2', 'assets/fonts/archive-edition-v4.woff',
+        'assets/fonts/archive-heading-v5.woff'
     )
     $eligible = @()
     $kept = 0

@@ -1,44 +1,148 @@
-!function(){"use strict";var e=H4.Portal,t=H4.esc,r={"张耀主":"他的名字在共同说明里。先翻教室留下的那摞纸，再对照这份说法。","小子":"检讨书上也用了这个称呼。教室里那份检讨与共同说明，是这页的起头。","清东":"他写在纸上的编号，需要同借还登记并读。先在档案室的“文件归档”里把十二件主件归好。","刘楼":"先到教室档案室，把十二件主件归档。回来再看他在旧梯口见过什么。","萧神":"节目安排也在教室那批纸中。把十二件主件按日期或人物归好，再读他的解释。","王京":"旧梯间还能通向后勤仓库。先去找交班材料，再来看这份关于门锁的说法。","张耀兰":"封条后面的门还没看过。回走廊找那页签字，借还登记要留着一同核对。","张纪兰":"先把档案室的十二件主件归档，再回来读她对作业本的说法。","于祯":"先把共同说明和其他主件一起归档。十二件都归位以后，再来对照他的签名与口述。","张耀王":"这页提到了四楼的另一道门。走廊上的照片还可以换个方向看，先回原处走走。","豆庵":"广播的频率记在点歌本上。先收好六段录音，再来对照他记得的声音。","张锦兰":"关于护栏的说法还缺04号封袋里的材料。先打开声音附件，再把两边的原话放在一起。","陈楼":"这页是整理者自己的说法。点歌本上记了六个频率。收齐那六段录音，再来看陈楼怎么说。"};H4.app.profileGuide=function(e){var t=H4.data.PROFILES[e].unlock,o="archive",a="去教室翻原件";if("clue_testimony"===t&&(a="回档案室整理主件"),"clue_warehouse"===t&&(o="stairs",a="回旧梯间找后勤仓库"),"clue_storage"!==t&&"clue_abnormal"!==t||(o="corridor",a="clue_storage"===t?"回走廊找封条后的门":"回走廊换个方向看"),"clue_audio"===t){var n=H4.hasClue("clue_radio_key")||H4.state.radio.length;o=n?"radio":"stairs",a=n?"回广播室收好片段":"回旧梯间找广播室"}return"clue_report"===t&&(o="footsteps",a="打开04号声音附件"),{text:r[e],route:o,label:a}},e.loadPreview=function(){return H4.CatalogPreview?Promise.resolve(H4.CatalogPreview):(e.previewLoading||(e.previewLoading=new Promise(function(t,r){var o=document.createElement("script");o.src="js/catalog_index.js?v=4.0.0",o.onload=function(){t(H4.CatalogPreview)},o.onerror=function(){e.previewLoading=null,o.remove(),r(new Error("索引未读全"))},document.head.append(o)})),e.previewLoading)};var o=e.home;function a(r,o,a,n,i,l){r.innerHTML=e.shell(o,'<article class="waiting-record object-waiting waiting-'+a+'"><div class="waiting-object">'+n+'</div><section class="waiting-caption"><p class="eyebrow">'+t(o)+"</p>"+i+function(e){return'<div class="page-links">'+e.map(function(e){return'<a href="#/'+e[0]+'">'+t(e[1])+"</a>"}).join("")+"</div>"}(l)+"</section></article>"),e.wire(r)}e.home=function(r){o(r);var a=r.querySelector(".portal-content"),n=r.querySelector(".home-copy"),i=r.querySelector(".name-list"),l=r.querySelector(".home-secondary"),c=document.createElement("div");c.className="archive-home-hero";var s=document.createElement("section");s.className="home-entrance",[".eyebrow","h2",".home-quiet",".file-entry","#home-links",".publication-link",".small-route"].forEach(function(e){var t=n.querySelector(e);t&&s.append(t)});var d=r.querySelector(".index-photo");c.append(s,d);var p=s.querySelector(".small-route");p&&(p.textContent="飞杳的旧主页 →",d.append(p));var u=r.querySelector(".maintenance-list"),f=document.createElement("section");f.className="compact-people",f.setAttribute("aria-label","十三位关联人"),f.innerHTML="<h2>共同说明 / 13位关联人</h2><p>姓名按原件顺序。找到出处后再展开证言。</p>",i.querySelectorAll("li").forEach(function(e){e.hidden=!1;var t=e.querySelector("button"),r=t.querySelector("span");r&&(t.title=r.textContent,t.setAttribute("aria-label",t.dataset.name+"，"+r.textContent),r.remove())});var h=H4.app.profileProgress(),m=document.createElement("small");m.className="home-profile-count",m.textContent="已展开 "+h.read+"/"+h.total,f.querySelector("h2").append(m),f.append(i);var v=document.createElement("section");v.className="archive-preview",v.innerHTML='<header><div><h2>原站日常目录</h2><p>2003-11-14网页留存 · 日常栏目，与2004年补录原件分开列目。</p></div><a href="#/directory?section=daily">完整原站索引 →</a></header><div class="preview-body"><p>正在读取目录……</p></div>';var y=document.createElement("div");y.className="home-bottom",y.append(u);var g=document.createElement("aside");g.className="home-attachments",g.append(l.querySelector(".avatar-box"),l.querySelector(".side-attachment"),l.querySelector("#slogan-left"));var oldSlogan=l.querySelector(".old-slogan-note");if(oldSlogan)g.append(oldSlogan);y.append(g),a.replaceChildren(c,f,v,y),a.classList.add("home-overview");var b=document.createElement("a");b.className="home-mobile-search",b.href="#/search",b.textContent="检索目录",r.querySelector(".archive-nav").append(b);var S=document.createElement("button");S.type="button",S.id="preview-expand",S.className="preview-expand",S.hidden=!0,S.setAttribute("aria-expanded","false"),S.setAttribute("aria-controls","home-preview-index"),v.append(S),S.onclick=function(){var e="true"!==this.getAttribute("aria-expanded");this.setAttribute("aria-expanded",String(e)),v.classList.toggle("preview-expanded",e),this.textContent=e?"收起其余目录":"查看全部45条目录"},matchMedia("(max-width:720px)"),S.hidden=!0,e.loadPreview().then(function(e){v.isConnected&&(v.querySelector("h2").insertAdjacentHTML("beforeend",'<span class="preview-count">共 '+e.total+" 条 · 最近 "+Math.min(8,e.entries.length)+" 条</span>"),v.querySelector(".preview-body").innerHTML='<table class="preview-index folio-table" id="home-preview-index"><caption>最近八条 / 原站日常</caption><thead><tr><th scope="col">序</th><th scope="col">日期</th><th scope="col">题名</th><th scope="col">栏目</th></tr></thead><tbody>'+e.entries.slice(0,8).map(function(e,r){return"<tr><td>"+String(r+1).padStart(2,"0")+"</td><td><time>"+t(e.date)+'</time></td><td><a href="'+t(e.url)+'" title="'+t(e.title)+'">'+t(e.title)+"</a></td><td>"+t(e.kind)+"</td></tr>"}).join("")+"</tbody></table>",S.textContent="查看全部"+Math.min(8,e.entries.length)+"条目录",S.hidden=!0)}).catch(function(){S.hidden=!0,v.isConnected&&(v.querySelector(".preview-body").innerHTML='<p>这次目录没有读全。<a href="#/school?section=search">打开完整原站索引 →</a></p>')})},H4.app.renderHome=e.home,e.updates=function(r){var o=H4.state.endingsSeen.filter(function(e){return["e2","e3","e4","e5"].includes(e)}),a=H4.state.flags.afterActions||{},n=o.length?0:1,i=o.map(function(e){var r,o,n=H4.Aftermath.pack(e);return'<tr role="row" data-incoming="'+e+'"><td role="cell" headers="incoming-date-head"><span class="incoming-mobile-label" aria-hidden="true">日期</span>'+(r=n.date.split(" / ")[0],o=/^2004年1月8日(—9日)?$/.exec(r),'<span class="incoming-date" aria-label="'+t(r)+'" title="'+t(r)+'">'+t(o?"2004-01-08"+(o[1]?"—09":""):r)+'</span></td><td role="cell" headers="incoming-topic-head"><a href="#/after?id=')+e+'">'+t(n.title)+'</a></td><td role="cell" headers="incoming-source-head"><span class="incoming-mobile-label" aria-hidden="true">来件</span>'+n.letters.map(function(e){return t(e.from)}).join("、")+'</td><td role="cell" headers="incoming-status-head"><span class="incoming-mobile-label" aria-hidden="true">状态</span>'+t(a[n.key]?"已收好":"待收好")+"</td></tr>"}).join("");i+=Array.from({length:n},function(){return'<tr class="incoming-blank" aria-hidden="true"><td>　</td><td>　</td><td>　</td><td>　</td></tr>'}).join(""),r.innerHTML=e.shell("新增往来",'<div class="incoming-register-layout"><section class="incoming-register"><p class="eyebrow">本机往来登记 / 与旧快照分开</p><h2>后来收到的回复</h2><table role="table"><caption>已入目录 '+o.length+" 组 · 留空 "+n+' 栏</caption><colgroup><col style="width:24%"><col style="width:34%"><col style="width:24%"><col style="width:18%"></colgroup><thead role="rowgroup"><tr role="row"><th role="columnheader" id="incoming-date-head" scope="col">日期</th><th role="columnheader" id="incoming-topic-head" scope="col">事由</th><th role="columnheader" id="incoming-source-head" scope="col">来件</th><th role="columnheader" id="incoming-status-head" scope="col">状态</th></tr></thead><tbody role="rowgroup">'+i+'</tbody></table><p class="incoming-register-foot">仅登记本次已收到的往来，空栏不另记寄出记录。</p></section><aside class="incoming-register-note"><h2>'+t(o.length?"回信已经另列日期":"簿上还留着空栏")+"</h2><p>旧快照不再更新。后来收到的回复放在这里，与当初留下的内容一起保存。</p>"+(o.length?"<p>不同浏览留下的往来分别收好，不拼成同一次经过，也不补成当晚的证据。</p>":"<p>这次浏览还没有收到回信。有人回信后，会在这里登记。</p>")+(2===H4.state.cycle&&7===H4.state.fragments.length?'<p><a href="#/mail">和照片一起寄来的两封信 →</a></p>':"")+'<section class="incoming-rules"><h3>这本簿子怎么记</h3><p>日期照来件的落款抄，不拿快照日期代替。没有注明的，仍留原样。</p><p>同次浏览的回信合记一组，点事由可翻到原信与附页；收好以后，状态栏才改字。</p><p>没收到的往来不预填，也不补一封“本该有”的信。</p></section><a href="#/home">返回目录</a></aside></div>',"updates"),e.wire(r)},e.routes.updates=e.updates,e.waiting=function(e,r,o,n){var i=(location.hash.split("?")[0]||"").slice(2),l="<h2>"+t(r)+"</h2><p>"+t(o)+"</p>";if("rooftop"===i)a(e,"天台门边","roof",'<figure class="closed-roof"><img src="assets/locked_roof.webp" alt="旧楼楼梯尽头，一扇挂锁尚未打开的铁门"><figcaption>门还没有打开。</figcaption></figure>',l,n);else if("profile"===i)a(e,"校友材料登记","profile",'<section class="identity-slip"><p>校友材料 / 选择姓名后核对出处</p><h2>选择要看的证言</h2><dl><div><dt>姓名</dt><dd>尚未选择</dd></div><div><dt>直接出处</dt><dd>　</dd></div><div><dt>收存日期</dt><dd>　</dd></div><div><dt>附页</dt><dd>　</dd></div></dl><label for="waiting-person">关联名单</label><select id="waiting-person"><option value="">请选择姓名</option>'+H4.data.NAMES.map(function(e){return"<option>"+t(e)+"</option>"}).join("")+'</select><button class="xp-btn" id="waiting-person-open">核对这份材料</button></section>',l,n),H4.$("#waiting-person-open").onclick=function(){var e=H4.$("#waiting-person").value;H4.data.NAMES.includes(e)?H4.go("#/profile?n="+encodeURIComponent(e)):H4.notice("先选择一位关联人。")};else if("after"===i){var c=H4.state.endingsSeen.filter(function(e){return["e2","e3","e4","e5"].includes(e)});c.length&&!new URLSearchParams(location.hash.split("?")[1]||"").get("id")&&(l="<h2>先选择一封已经收到的回信</h2><p>后续往来按对应副本分别收存，不合并成同一次经过。</p>",n=c.map(function(e){return["after?id="+e,H4.Aftermath.pack(e).title]}).concat(n)),a(e,"后续往来夹","after",'<section class="reply-pocket"><span class="pocket-label">后来收到的回复</span><div class="reply-empty"><p>对应回信</p><span>尚未收存</span></div><p class="reply-rule">回复单独记日期，不补成当晚的经过。</p></section>',l,n)}else if("record"===i){l=l.replace("公开副本尚未形成","查证副本尚未形成");var s=H4.state.read.map(function(e){return H4.data.ARCHIVE_FILES.find(function(t){return t.id===e})}).filter(Boolean).slice(-3);a(e,"查证副本试打","record",'<section class="print-tray"><div class="print-slot"></div><div class="partial-print"><p>本机暂存清单 / 尚未发布</p><h2>纸面原件阅读记录</h2><ol>'+Array.from({length:3},function(e,r){return"<li>"+t(s[r]?s[r].title:"　")+"</li>"}).join("")+'</ol><p class="print-unfinished">查证副本尚未形成</p></div></section>',l,n)}else a(e,"待收存页面","generic","",l,n)};var n=H4.app.renderPersonal;H4.app.renderPersonal=function(e){if(H4.state.flags.personalPagePublished)n(e);else{var r=H4.state.read.includes("a6");a(e,"未编排的留存页","personal",'<section class="unmade-album"><div class="album-mount"><img src="assets/courtyard_memory.webp" alt="作业本里留着的院子照片"><span>照片还夹在作业本里</span></div><div class="album-caption"><p>留存页 / 尚未编排</p><h2>'+t(r?"《槐花》与照片":"照片与文章")+'</h2><p>公开页尚未留下。</p><div class="album-lines"></div></div></section>',"<h2>这一页还没有留下</h2><p>照片与文章仍分别保存在原件里。后来收到的信，会让你决定这一页如何留下。</p>",[["archive?file=a6","翻阅作业本"],["home","回到工作副本"]])}};var i=H4.app.renderMail;H4.app.renderMail=function(e){var t=H4.state;2===t.cycle&&t.fragments.length>=7?i(e):(a(e,"补录信封","mail",'<button type="button" class="sealed-envelope" id="sealed-envelope" aria-label="翻看补录封套背面" aria-pressed="false"><span class="envelope-address">补录材料<br><b>照片与来信 / 封套</b></span><span class="envelope-stamp">2004-01-06<br>收存</span><span class="envelope-back-note">封口尚未展开</span></button>','<h2>信封的两面都还留着</h2><p class="object-instruction">点封套，翻看另一面。</p><p>七页日记收好后，再展开这里的来信。收存日期与寄出日期分开，不补写未见的邮戳。</p><p class="mail-readiness">本次已收好日记 '+t.fragments.length+" / 7"+(2===t.cycle?"":" · 再次浏览时可收集")+"</p>",[["home","继续当前浏览"],["directory","查看留存目录"]]),H4.$("#sealed-envelope").onclick=function(){var e=this.classList.toggle("is-back");this.setAttribute("aria-pressed",String(e)),this.setAttribute("aria-label",e?"翻回补录封套正面":"翻看补录封套背面")})};var l=e.decorate;e.decorate=function(e,t,r){l(e,t,r);var o=["duty","warehouse","storage","footsteps","corridor","stairs","rooftop","basement"].includes(t)&&!e.querySelector(".waiting-record")&&e.querySelector(".page");if(e.classList.toggle("scene-frame",!!o),document.body.classList.toggle("view-scene",!!o),o){var a=e.querySelector(".archive-colophon");a&&a.remove()}}}(),function(){"use strict";var e=H4.Portal,t=H4.esc,r=H4.data,o=e.nav;function a(e,t,r){var o=document.createElement(e);return o.className=t||"",r&&(o.innerHTML=r),o}function n(e,r,o){return'<section class="folio-box '+(o||"")+'"><h2 class="folio-bar">'+t(e)+"</h2>"+r+"</section>"}function i(e,r,o,a){return'<figure class="folio-photo '+(a||"")+'"><img src="assets/'+e+'" alt="'+t(r)+'" loading="lazy"><figcaption>'+t(o)+"</figcaption></figure>"}function l(e,r,o,a){return'<table class="folio-table '+(a||"")+'"><caption>'+t(e)+"</caption><thead><tr>"+r.map(function(e){return'<th scope="col">'+t(e)+"</th>"}).join("")+"</tr></thead><tbody>"+o.join("")+"</tbody></table>"}function c(e){return"<tr>"+e.map(function(e){return"<td>"+e+"</td>"}).join("")+"</tr>"}function s(e,r){return'<a href="'+t(e)+'">'+t(r)+"</a>"}function d(){var e=H4.app.profileProgress(),t=H4.state;return n("本机阅读",l("只记当前浏览器",["材料","已展开"],[c(["纸面原件",r.ARCHIVE_FILES.filter(function(e){return t.read.includes(e.id)}).length+" / 12"]),c(["原证言",e.read+" / 13"]),c(["查证记录",t.contradictions.length+" / 5"])])+s("#/about","保存范围与浏览方法"),"folio-progress")}function p(e, rows, size, label, mountPage = false) {
-  if (rows.length <= size) return;
-  var current = 0, pages = Math.ceil(rows.length / size), nav = a("nav", "folio-pager");
-  var tbody = rows[0].parentElement;
-  nav.setAttribute("aria-label", label + "分页");
-  var previous = H4.btn("上一页", function(){show(current - 1, true)});
-  var next = H4.btn("下一页", function(){show(current + 1, true)});
-  var status = a("span", "edition-pager-status"), numbers = a("span", "edition-pager-numbers");
-  status.setAttribute("role", "status");
-  nav.append(previous, status, numbers, next);
-  e.append(nav);
-  show(0, false);
-  function show(page, move) {
-    current = Math.max(0, Math.min(pages - 1, page));
-    var start = size * current;
-    if (mountPage) tbody.replaceChildren(...rows.slice(start, start + size));
-    else rows.forEach(function(row, i){row.hidden = i < start || i >= start + size});
-    previous.disabled = current === 0;
-    next.disabled = current === pages - 1;
-    status.textContent = (current + 1) + " / " + pages + " · 共" + rows.length + "项";
-    numbers.replaceChildren();
-    var prior = -1;
-    for (let i = 0; i < pages; i++) {
-      if (i !== 0 && i !== pages - 1 && Math.abs(i - current) > 2) continue;
-      if (i > prior + 1) numbers.append(a("span", "", "…"));
-      const button = H4.btn(String(i + 1), function(){show(i, true)}, "edition-page-number");
-      button.setAttribute("aria-label", "第" + (i + 1) + "页");
-      if (i === current) button.setAttribute("aria-current", "page");
-      numbers.append(button);
-      prior = i;
+(() => {
+  "use strict";
+  var e=H4.Portal,t=H4.esc,r={"张耀主":"他的名字在共同说明里。先翻教室留下的那摞纸，再对照这份说法。","小子":"检讨书上也用了这个称呼。教室里那份检讨与共同说明，是这页的起头。","清东":"他写在纸上的编号，需要同借还登记并读。先在档案室的“整理纸张”里把十二件主件归好。","刘楼":"先到教室档案室，把十二张纸按顺序摆好。回来再看他在旧梯口见过什么。","萧神":"节目安排也在教室那批纸中。把十二件主件按日期或人物归好，再读他的解释。","王京":"旧梯间还能通向后勤仓库。先去找交班材料，再来看这份关于门锁的说法。","张耀兰":"封条后面的门还没看过。回走廊找那页签字，借还登记要留着一同核对。","张纪兰":"先把档案室的十二张纸摆好，再回来读她对作业本的说法。","于祯":"先把共同说明和其他主件一起摆好。十二件都归位以后，再来对照他的签名与口述。","张耀王":"这页提到了四楼的另一道门。走廊上的照片还可以换个方向看，先回原处走走。","豆庵":"广播的频率记在点歌本上。先收好六段录音，再来对照他记得的声音。","张锦兰":"关于护栏的说法还缺04号封袋里的材料。先打开声音附件，再把两边的原话放在一起。","陈楼":"陈楼也在那张名单上。这是他自己说的。点歌本上记了六个频率。收齐那六段录音，再来看陈楼怎么说。"};H4.app.profileGuide=function(e){var t=H4.data.PROFILES[e].unlock,o="archive",a="去教室翻原件";if("clue_testimony"===t&&(a="回档案室整理主件"),"clue_warehouse"===t&&(o="stairs",a="回旧梯间找后勤仓库"),"clue_storage"!==t&&"clue_abnormal"!==t||(o="corridor",a="clue_storage"===t?"回走廊找封条后的门":"回走廊换个方向看"),"clue_audio"===t){var n=H4.hasClue("clue_radio_key")||H4.state.radio.length;o=n?"radio":"stairs",a=n?"回广播室收好片段":"回旧梯间找广播室"}return"clue_report"===t&&(o="footsteps",a="打开04号声音附件"),{text:r[e],route:o,label:a}};
+  const roomRoutes = new Set(["duty","warehouse","storage"]);
+  const wrappedRoutes = new Set(["profile","mail","after","record","radio","footsteps",...roomRoutes]);
+  const make = (tag,className,html = "") => {
+    const node = document.createElement(tag);
+    node.className = className;
+    node.innerHTML = html;
+    return node;
+  };
+  const link = (href,label) => '<a href="' + t(href) + '">' + t(label) + '</a>';
+  const links = items => '<p class="campus-related">' + items.map(([route,label]) => link("#/" + route,label)).join("　") + '</p>';
+  const photo = (src,alt,caption) => '<figure class="folio-photo"><img src="assets/' + src + '" alt="' + t(alt) +
+    '" loading="lazy"><figcaption>' + t(caption) + '</figcaption></figure>';
+  function pending(root,title,kind,object,heading,body,related) {
+    root.innerHTML = e.shell(title,'<article class="waiting-record object-waiting waiting-' + kind +
+      '"><div class="waiting-object">' + object + '</div><section class="waiting-caption"><h2>' + t(heading) +
+      '</h2><p>' + t(body) + '</p><div class="page-links">' + links(related) + '</div></section></article>');
+    e.wire(root);
+  }
+  e.waiting = (root,heading,body,related) => {
+    const route = H4.app.curRoute.split("?")[0].slice(2);
+    if (route === "rooftop") {
+      pending(root,e.labels.rooftop,"roof",photo("locked_roof.webp","挂着锁的天台铁门","门还没有打开。"),heading,body,related);
+    } else if (route === "profile") {
+      const names = H4.data.NAMES.map(name => '<option>' + t(name) + '</option>').join("");
+      pending(root,e.labels.profile,"profile",'<label for="waiting-person">同学名单</label> ' +
+        '<select id="waiting-person"><option value="">请选择姓名</option>' + names +
+        '</select> <button type="button" class="xp-btn" id="waiting-person-open">打开</button>',
+        "选一个名字","纸上对得上的话放在姓名下面，还有些要先去找出处。",[["archive","教室里的纸"],["messages","回留言本"]]);
+      root.querySelector("#waiting-person-open").onclick = () => {
+        const name = root.querySelector("#waiting-person").value;
+        if (H4.data.NAMES.includes(name)) H4.go("#/profile?n=" + encodeURIComponent(name));
+        else H4.notice("先选一个名字。");
+      };
+    } else {
+      pending(root,e.labels[route] || heading,"generic","",heading,body,related);
     }
-    if (move) {
-      var item = rows[current * size];
-      item.setAttribute("tabindex", "-1");
-      item.focus({preventScroll: true});
-      item.scrollIntoView({block: "nearest"});
+  };
+
+  const personal = H4.app.renderPersonal;
+  H4.app.renderPersonal = root => {
+    if (H4.state.flags.personalPagePublished) personal(root);
+    else pending(root,e.labels.personal,"personal",
+      photo("courtyard_memory.webp","外婆家的院子","照片还夹在作文本里。"),
+      "这页还没写好","照片和作文暂时各放在原来的地方。",
+      [["essays","看《槐花》"],["album","去相册"]]);
+  };
+
+  const mail = H4.app.renderMail;
+  H4.app.renderMail = root => {
+    if (H4.state.cycle === 2 && H4.state.fragments.length >= 7) return mail(root);
+    const envelope = '<button type="button" class="sealed-envelope" id="sealed-envelope" aria-label="翻看信封背面" aria-pressed="false">' +
+      '<span class="envelope-address">给林杳同学<br><b>照片和信</b></span><span class="envelope-stamp">2004-01-06<br>收到</span>' +
+      '<span class="envelope-back-note">封口还粘着。</span></button>';
+    pending(root,e.labels.mail,"mail",envelope,"信封还没打开",
+      "等七页日记都找回来，再拆信。已找到 " + H4.state.fragments.length + " / 7 页。",
+      [["diary","回日记"],["album","回相册"]]);
+    const button = root.querySelector("#sealed-envelope");
+    button.onclick = () => {
+      const back = button.classList.toggle("is-back");
+      button.setAttribute("aria-pressed",String(back));
+      button.setAttribute("aria-label",back ? "翻回信封正面" : "翻看信封背面");
+    };
+  };
+
+  function room(root, route) {
+    const page = root.querySelector(".room-" + route);
+    const image = page.querySelector(".bg-img");
+    const object = make("figure","room-object");
+    image.classList.remove("bg-img");
+    object.append(image);
+    page.prepend(object);
+    const content = page.querySelector(".room-paper");
+    const entries = route === "duty" ?
+      [["school?section=services&id=duty","学校的当日轮值表"],["stairs","楼梯检修路线"]] :
+      route === "warehouse" ? [["duty","值班桌上的借还单"],["stairs","楼梯间"]] : [["duty","值班桌上的借还单"]];
+    content.insertAdjacentHTML("beforeend",links(entries));
+  }
+  function shape(root,route) {
+    if (roomRoutes.has(route) && root.querySelector(".room-" + route)) room(root,route);
+    if (route === "profile") {
+      const note = root.querySelector(".testimony .source-note");
+      if (note) note.textContent = "陈楼记于2004年1月6日。后来问到的话另写在下面，原话照录。";
+    }
+    if (route === "record") {
+      const pages = root.querySelectorAll(".record-original");
+      for (const page of pages) {
+        const heading = page.querySelector("h2");
+        if (!heading) continue;
+        const details = make("details","campus-paper-fold","<summary>" + t(heading.textContent) + "</summary>");
+        page.before(details);
+        details.append(page);
+        heading.remove();
+      }
+    }
+    if (route === "radio") {
+      const panel = root.querySelector(".radio-panel");
+      if (panel) {
+        panel.querySelector("header").insertAdjacentHTML("afterend",'<div class="folio-radio-object">' +
+          photo("radio_room.webp","广播室的收音机","广播室的收音机") + '</div>');
+        const tuning = make("section","folio-radio-tuning");
+        panel.querySelector(".folio-radio-object").after(tuning);
+        for (const selector of [".radio-dial","#radio-range",".radio-controls","#radio-signal"]) {
+          const control = panel.querySelector(selector);
+          if (control) tuning.append(control);
+        }
+      }
+    }
+    if (route === "footsteps") {
+      const page = root.querySelector(".footsteps-page");
+      if (page) {
+        const controls = make("div","folio-attachment-controls");
+        controls.append(...Array.from(page.children).filter(node => !node.matches(".scene-bottom")));
+        page.insertAdjacentHTML("afterbegin",photo("attachment_envelope.webp","04号录音的信封","04号录音"));
+        page.firstElementChild.classList.add("attachment-object");
+        page.append(controls);
+      }
     }
   }
-}e.nav=function(e){return o(e||(location.hash||"#/home").split("?")[0].slice(2))};var u=e.home;e.home=function(e){u(e);var t=e.querySelector(".home-overview"),o=t.querySelector(".archive-home-hero"),i=t.querySelector(".archive-preview"),l=t.querySelector(".compact-people"),c=t.querySelector(".home-bottom"),d=t.querySelector(".index-photo"),p=c.querySelector(".maintenance-list"),f=c.querySelector(".home-attachments"),h=a("aside","folio-home-rail",n("镜像 / 04",'<p>原站已经关闭。<br>这份副本仍可浏览。</p><nav aria-label="留存入口">'+s("#/snapshot","原站封面 / 2003")+s("#/directory","留存目录 / 2004")+s("#/versions","两次收存的说明")+s("#/updates","后来寄来的信")+'</nav><p class="rail-note">'+(2===H4.state.cycle?"再次浏览 / 夹页另存":"第28位访问者 / 本机记录")+"</p>"));h.append(p);var m=a("div","folio-home-center");d&&o.append(d),m.append(o,i);var v=a("aside","folio-home-right");v.append(f,l),t.replaceChildren(h,m,v),t.classList.add("folio-home"),t.querySelectorAll("[data-name]").forEach(function(e){var t=e.dataset.name,o=a("span","person-state");o.textContent=H4.hasClue(r.PROFILES[t].unlock)?H4.state.read.includes("p_"+t)?"已展开":"可展开":"待出处",e.append(o)}),t.dataset.folioHome="1"},H4.app.renderHome=e.home,e.directory=function(o,a){var u=H4.state,f=n("01 / 原页与附件",l("入口照存，内容按来源分别保留",["名称","类型","日期"],[["snapshot","2003原站封面","只读快照","2003-11-14"],["corridor","旧楼页面","照片 / 现场","原站留存"],["messages","飞杳的主页","单页留存","原站留存"],["footsteps","04号声音附件","封存附件","2004收存"],["archive","纸面原件 / 共12件","补录材料","2004-01-06"],["updates","后来寄来的信","另列日期","随来件记"],["missing?from=school-mail","原站投稿信箱","链接失效","原站留存"]].map(function(e){return c([s("#/"+e[0],e[1]),t(e[2]),t(e[3])])}))),h=n("02 / 纸面目录",l("题名可查；封存正文仍需先打开",["序","原件","日期 / 来源","状态"],r.ARCHIVE_FILES.map(function(e,r){return c([String(r+1).padStart(2,"0"),'<button class="catalog-source" data-catalog-source="'+e.id+'">'+t(e.title)+"</button>",t(e.sub),u.read.includes(e.id)?"已展开":"待展开"])}))),m=n("03 / 整理手记",l("这些是副本整理说明，不作为事故证据",["日期","标题"],e.notes.map(function(e){return c([t(e.date),s("#/item?id="+e.id,e.title)])})),"folio-notes"),v=n("04 / 原站日常索引",'<p>原站栏目，与补录原件分开列目。</p><div id="directory-daily"><p>正在读取目录……</p></div>',"folio-daily");o.innerHTML=e.shell("留存目录",'<p class="catalog-intro">可以查到文件存在，不代表已经读到其中的内容。纸面材料与后来来信分别列目。</p><div class="folio-directory"><div class="catalog-columns">'+f+h+m+v+"</div><aside>"+i("site03_classroom.jpg","原站留存的教室照片","2003 / 原站栏目附图")+d()+n("目录覆盖","<p>原站网页、纸面补录、后来来信，各自保留日期。</p>"+s("#/snapshot","打开原站封面")+s("#/updates","翻到往来簿"))+"</aside></div>");var y=o.querySelector(".folio-notes"),dailyContainer;y.id="maintenance-directory",[y,o.querySelector(".folio-daily")].forEach(function(e){var t=document.createElement("details");t.className=e.className,t.id=e.id;var r=document.createElement("summary");for(r.className="folio-bar",r.textContent=e.querySelector("h2").textContent,e.querySelector("h2").remove(),t.append(r);e.firstChild;)t.append(e.firstChild);e.replaceWith(t),"maintenance-directory"===t.id&&(y=t),t.classList.contains("folio-daily")&&"daily"===a.get("section")&&(t.open=!0)}),"notes"===a.get("section")&&(y.open=!0),p(y,Array.from(y.querySelectorAll("tbody tr")),8,"整理手记",true),o.querySelectorAll("[data-catalog-source]").forEach(function(e){e.onclick=function(){H4.go("#/archive?file="+e.dataset.catalogSource)}}),e.wire(o),"daily"===a.get("section")&&H4.app.later(40,function(){o.querySelector(".folio-daily").scrollIntoView({block:"start"})}),"notes"===a.get("section")&&H4.app.later(40,function(){y.scrollIntoView({block:"start"})}),dailyContainer=o.querySelector("#directory-daily"),e.loadPreview().then(function(e){var r=dailyContainer;if(r&&r.isConnected){var a=e.all||e.entries;r.innerHTML=l("原站日常 / 共"+e.total+"条",["日期","题名","栏目"],a.map(function(e){return c([t(e.date),s(e.url,e.title),t(e.kind)])})),p(r,Array.from(r.querySelectorAll("tbody tr")),12,"原站日常",true)}}).catch(function(){var e=dailyContainer;e&&e.isConnected&&(e.innerHTML="<p>这次目录没有读全。</p>"+s("#/school?section=search","打开完整原站索引"))})},e.routes.directory=e.directory,H4.G.radio.paintList=function(){var e=this,o=H4.$("#radio-list");var tapeCondition=["课间留声","侧B片段","仅存环境声","人声有损","末端有缺损","带头试音"];
-o.innerHTML=l("片长取自保存下来的残音；解调后可重播",["序","收录段","片长","状态"],r.RADIO_FRAGMENTS.map(function(fragment,index){
-  var saved=H4.state.radio.includes(fragment.id);
-  return c([String(index+1).padStart(2,"0"),'<button type="button" class="radio-item" data-recording="'+fragment.id+'">'+t(fragment.title)+"</button>",
-    r.WAVEFORMS[fragment.id].duration.toFixed(1)+"秒",tapeCondition[index]+(saved?" · 可重播":"")]);
-})),o.querySelectorAll("[data-recording]").forEach(function(t){var o=r.RADIO_FRAGMENTS.find(function(e){return e.id===t.dataset.recording});t.onclick=function(){H4.state.radio.includes(o.id)?e.play(o):H4.notice("这一段还没有收录。先在刻度上找到它。")}})};var f={boot:["窄页","连接记录","底部"],home:["三栏","照片目录","侧栏"],directory:["左主右辅","分组目录表","表内"],item:["左辅右主","整理手记","上下篇"],versions:["双主栏","收存对照","对照栏"],snapshot:["左主右辅","原站栏目","顶部"],school:["原站子页","校园内容","栏目内"],search:["双栏","检索结果表","顶部检索"],updates:["左主右辅","往来登记簿","事由行"],about:["双主栏","问答与站图","树状目录"],corridor:["全幅","走廊行进照片","底部前进"],stairs:["左辅右主","门牌照片与梯级","门牌内"],basement:["桌面","申请拼片","拼片内"],rooftop:["全幅","门边文字与纸页","三项抉择"],archive:["桌面","原件抽取与归档","工作区"],duty:["左图右表","借还登记","材料行"],warehouse:["三栏","交班物件目录","留存表"],storage:["左辅右主","门与抽屉附页","抽拉行"],radio:["通栏","调频与磁带表","行内重播"],footsteps:["窄页","牛皮封袋","底部核对"],messages:["左主右辅","旧页留言条","照片旁"],profile:["三栏","登记与证言","补问行"],mail:["双主栏","来信与取舍登记","信纸旁"],personal:["双主栏","留存照片与作文","顶部附记"],after:["左主右辅","来信与回复表","回复登记"],record:["窄页","白纸原件","逐页翻阅"],ending:["全幅","浏览后署名","结束行"]};e.layoutFamilies=f;var h=e.decorate;e.decorate=function(o,u,m){if(h(o,u,m),!o.firstElementChild||o.firstElementChild.dataset.folioDecorated!==location.hash){var v=f[u]||["左主右辅","失效目录","入口"];if(o.dataset.layoutFamily=v.join("|"),o.dataset.folioHash=location.hash,o.dataset.folioReady="1",o.classList.add("folio-route"),function(t,r){if(!t.querySelector(".portal-page")&&!["boot","ending","snapshot","school","corridor","stairs","basement","rooftop","archive"].includes(r)){var o=Array.from(t.children).filter(function(e){return!e.matches(".route-crumb,.archive-colophon")}),n=a("div","portal-page folio-shell",e.header(e.labels[r])+e.nav(r)+'<div class="portal-content"></div>'+e.footer()),i=n.querySelector(".portal-content");o.forEach(function(e){i.append(e)}),t.querySelectorAll(".route-crumb,.archive-colophon").forEach(function(e){e.remove()}),t.append(n),t.classList.remove("scene-frame"),document.body.classList.remove("view-scene"),e.wire(t),e.bindTools(t)}}(o,u),"profile"===u&&function(e,o){var i=o.get("n"),d=r.NAMES.includes(i)&&r.PROFILES[i],p=e.querySelector(".testimony");if(d&&p){var u=H4.hasClue(d.unlock),f=H4.app.profileGuide(i),h=r.INTERVIEWS[i],m=a("section","folio-profile-register",n("材料登记",l("原件与续页分开",["字段","登记"],[["姓名",t(i)],["直接出处",s("#/"+f.route,f.label)],["收存日期","2004-01-06 / 收存"],["原证言",u?"已展开":"待出处"],["访谈续页",h?h.questions.length+"份补问 / 另页":"未另附续页"],["关联疑点",String(r.CONTRADICTION_PAIRS.filter(function(e){return e.pair.includes("p_"+i)}).length)+"处 / 需另核对"]].map(function(e){return c(e)})))),v=a("aside","folio-profile-links",n("关联名单","<ul>"+r.NAMES.filter(function(e){return e!==i}).slice(0,6).map(function(e){return"<li>"+s("#/profile?n="+encodeURIComponent(e),e)+"</li>"}).join("")+'</ul><button type="button" data-all-profiles>查看全部关联人</button>')+n("原件与附页",s("#/archive","纸面原件")+s("#/directory","留存目录")+s("#/radio","录音与听写稿"))),y=a("div","folio-profile");p.before(y),y.append(m,p,v),v.querySelector("[data-all-profiles]").onclick=H4.app.showProfiles;var g=p.querySelector(".interview-questions");if(g){var b=a("table","folio-table interview-register",'<caption>访谈续页 / 对应疑点核对后展开</caption><thead><tr><th scope="col">补问</th><th scope="col">登记</th></tr></thead><tbody></tbody>');Array.from(g.children).forEach(function(e){var t=document.createElement("tr"),r=document.createElement("td"),o=document.createElement("td");r.append(e),o.textContent=e.classList.contains("unfiled")?"待查证":"可展开",t.append(r,o),b.querySelector("tbody").append(t)}),g.append(b)}}}(o,m),["duty","warehouse","storage"].includes(u)&&function(e,r){var o=e.querySelector(".room-"+r),c=e.querySelector(".room-paper");if(o&&c){var s=o.querySelector(".bg-img"),d=s.getAttribute("src").slice(7),p=c.querySelector(".room-caption"),u=c.querySelector("#room-sources"),f=Array.from(u.children);s.remove();var h=a("section","room-object",i(d,c.querySelector("h2").textContent,"旧楼照片附页 / "+c.querySelector("h2").textContent)),m=f.map(function(e,t){var r=document.createElement("tr"),o=document.createElement("td"),a=document.createElement("td");return o.textContent=String(t+1).padStart(2,"0"),a.append(e),r.append(o,a),r});if(u.innerHTML=l("留存物目录 / 点击翻阅",["序","材料"],[]),m.forEach(function(e){u.querySelector("tbody").append(e)}),o.prepend(h),"warehouse"===r){h.insertAdjacentHTML("beforeend",n("交班材料","<p>"+t(p.textContent)+"</p>")),p.hidden=!0;var v=h.querySelector(".folio-box");v.classList.add("warehouse-note"),o.append(v)}if("storage"===r){var y=a("div","storage-drawers");Array.from(u.querySelectorAll("tbody tr")).forEach(function(e,t){var r=document.createElement("details"),o=document.createElement("summary");o.textContent="附页 "+String(t+1).padStart(2,"0")+" / "+e.querySelector("button").textContent.replace(/^翻阅 /,""),r.append(o,e.querySelector("button")),y.append(r)}),u.replaceChildren(y)}}}(o,u),"messages"===u&&function(e){var t=e.querySelector(".personal-page");if(t){var r=Array.from(t.children).filter(function(e){return"P"===e.tagName}),o=a("section","folio-messages");r.forEach(function(e,t){var r=a("section","message-strip");r.append(e),o.append(r)});var n=t.querySelector("figure"),i=a("aside","folio-message-photo");i.append(n,t.querySelector("#photo-back")),t.querySelector("header").after(o,i),t.insertAdjacentHTML("beforeend",'<p class="message-readonly">第28位访问者 · 留言板只留存，不接新帖。</p>')}}(o),"about"===u&&function(e){var r=e.querySelector(".maintenance-article");if(r){var o=Array.from(r.querySelectorAll("p:not(.source-note)")),i=["保存了哪些材料？","地址栏会连到哪里？","怎样浏览旧楼？","字号与进度在哪里？","为什么留下这份副本？","这份记录到哪里为止？"],d=r.querySelector(".source-note"),p=a("section","folio-about-qa",l("保存范围与浏览方法",["问题","说明"],o.map(function(e,r){return c([t(i[r]||"补充说明"),e.innerHTML])})));r.replaceChildren(p),d&&r.append(d);var u=a("nav","folio-map",n("副本的三个入口","<ul><li>"+s("#/snapshot","2003 / 原站快照")+"<ul><li>"+s("#/school?section=news","校园栏目")+"</li><li>"+s("#/messages","飞杳的旧主页")+"</li><li>"+s("#/corridor","旧楼照片附页")+"</li></ul></li><li>"+s("#/directory","2004 / 校友补录")+"<ul><li>"+s("#/archive","纸面原件")+"</li><li>"+s("#/profile","原证言与补问")+"</li></ul></li><li>"+s("#/updates","后来收到的往来")+"<ul><li>"+s("#/mail","照片与来信封套")+"</li></ul></li></ul>"));u.setAttribute("aria-label","副本结构"),r.after(u)}}(o),["item","missing"].includes(u)&&function(r,o,i){var l=r.querySelector(".maintenance-article");if(l){if("item"===i){var c=e.notes.findIndex(function(e){return e.id===o.get("id")});if(c>=0){var p=a("nav","folio-article-nav");return p.setAttribute("aria-label","整理手记上下篇"),c>0&&p.insertAdjacentHTML("beforeend",s("#/item?id="+e.notes[c-1].id,"上一篇："+e.notes[c-1].title)),c<e.notes.length-1&&p.insertAdjacentHTML("beforeend",s("#/item?id="+e.notes[c+1].id,"下一篇："+e.notes[c+1].title)),l.append(p),void l.before(a("aside","folio-article-index",n("目录维护","<p>"+t(e.notes[c].date)+" / 收存</p>"+s("#/directory?section=notes","全部整理手记"))))}}l.classList.add("folio-missing"),l.insertAdjacentHTML("afterbegin",'<div class="missing-file-number" aria-hidden="true">04 / —</div>'),l.after(a("aside","folio-missing-side",d()+n("留存入口",s("#/snapshot","查看原站封面")+s("#/search","检索本地目录"))))}}(o,m,u),"personal"===u&&function(e){var t=e.querySelector(".published-article");if(t){var r=t.querySelector(".published-photo"),o=a("aside","folio-published-gallery");o.append(r),o.insertAdjacentHTML("beforeend",i("id_photo_clear.jpg","留存页中的飞杳照片","飞杳；照片原件另存","published-portrait"));var n=a("div","folio-published-prose");Array.from(t.children).filter(function(e){return!e.matches("header,.page-links")}).forEach(function(e){n.append(e)}),t.querySelector("header").after(o,n)}}(o),"after"===u&&function(e,r){var o=e.querySelector(".after-correspondence");if(o){var s=H4.Aftermath.pack(r.get("id"));if(s){var d=a("div","folio-received-letters"),p=a("aside","folio-reply-register",i("envelope_front.webp","来信封套的留存示意","往来封套 / 具体日期见原信")+n("回复登记",l("来件落款照记",["来件","落款"],s.letters.map(function(e){return c([t(e.from),t(e.date)])}))));o.querySelectorAll(".after-letter").forEach(function(e){d.append(e)});var u=o.querySelector(".after-action");p.append(u),o.querySelector("header").after(d,p)}}}(o,m),"record"===u&&function(e){var r=e.querySelector(".public-record");if(r){var o=Array.from(r.querySelectorAll(".record-original"));o.forEach(function(e,t){e.insertAdjacentHTML("afterbegin",'<p class="print-page-number">原件 '+(t+1)+" / "+o.length+"</p>")});var n=a("div","folio-print-pages");o.forEach(function(e){n.append(e)}),r.querySelector("header").after(n),p(n,o,1,"查证副本原件");var i=a("details","folio-print-index");i.innerHTML="<summary>本副本原件索引 / 共"+o.length+"份</summary>"+l("公开范围不包含家中私信",["序","原件"],o.map(function(e,r){return c([String(r+1).padStart(2,"0"),t(e.querySelector("h2").textContent)])})),n.before(i)}}(o),"radio"===u&&function(e){var t=e.querySelector(".radio-panel");if(t){var r=a("div","folio-radio-object",i("radio_room.jpg","旧广播室里留下的收音机","广播室照片 / 波形仅显示当前原带残留声"));t.querySelector("header").after(r);var o=a("section","folio-radio-tuning");[".radio-dial","#radio-range",".radio-controls","#radio-signal"].forEach(function(e){var r=t.querySelector(e);r&&o.append(r)}),r.after(o)}}(o),"footsteps"===u&&function(e){var t=e.querySelector(".footsteps-page");if(t){t.insertAdjacentHTML("afterbegin",i("attachment_envelope.webp","灰绿桌面上的旧牛皮纸封袋","04 / 封袋示意；原件仍保持封存","attachment-object"));var r=a("div","folio-attachment-controls");Array.from(t.children).filter(function(e){return!e.matches(".attachment-object,.scene-bottom")}).forEach(function(e){r.append(e)}),t.append(r)}}(o),"mail"===u){var y=o.querySelector(".mail-workspace");y&&y.classList.add("folio-mail")}if("search"===u){var g=o.querySelector(".search-results"),b=g&&Array.from(g.querySelectorAll("article"));if(b&&b.length){var S=a("div","folio-search-table",l("检索结果 / 只检索已展开正文",["序","题名 / 摘录"],[]));b.forEach(function(e){var t=document.createElement("tr"),r=document.createElement("td"),o=document.createElement("td");r.append(e.firstElementChild),o.append(e.lastElementChild),t.append(r,o),S.querySelector("tbody").append(t)}),g.replaceChildren(S),p(S,Array.from(S.querySelectorAll("tbody tr")),10,"检索结果")}}if("stairs"===u){var q=o.querySelector(".stairs-page");if(q){var H=a("aside","folio-stair-index","<p>门口检修路线</p><ol>"+r.STAIR_FLOORS.map(function(e,r){return"<li"+(H4.state.floor===r?' class="current" aria-current="step"':"")+">"+t(e.floor)+"</li>"}).join("")+"</ol>");H.setAttribute("aria-label","旧梯楼层"),q.append(H)}}H4.Edition2003.archive(o,u,m),o.querySelectorAll("img:not([alt])").forEach(function(e){e.alt="留存附图"}),o.firstElementChild&&(o.firstElementChild.dataset.folioDecorated=location.hash)}}}(),H4.MaterialViewsLoaded=!0;
+
+  const decorate = e.decorate;
+  e.decorate = (root,route,params) => {
+    decorate(root,route,params);
+    const school = route === "school" || route === "snapshot";
+    const scene = H4.Shells.type(route) === "stage";
+    document.body.classList.toggle("view-scene",scene);
+    if (school) return;
+    if (root.firstElementChild?.dataset.campusPage === location.hash) return;
+    root.classList.add("folio-route");
+
+    if (!scene && wrappedRoutes.has(route) && !root.querySelector(".portal-page")) {
+      const content = [...root.children].filter(node => !node.matches(".campus-return"));
+      root.innerHTML = e.shell(e.labels[route],"");
+      const panel = root.querySelector(".portal-content");
+      panel.append(...content);
+      for (const heading of panel.querySelectorAll("h1")) {
+        heading.replaceWith(make("h2",heading.className,t(heading.textContent)));
+      }
+    }
+    shape(root,route);
+    H4.Edition2003.archive(root,route,params);
+    e.wire(root);
+    if (root.firstElementChild) root.firstElementChild.dataset.campusPage = location.hash;
+  };
+  H4.MaterialViewsLoaded = true;
+})();

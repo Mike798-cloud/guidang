@@ -59,7 +59,7 @@
       warehouse:"building/store.htm", storage:"building/extra.htm", radio:"radio/tape.htm",
       footsteps:"radio/04.htm", profile:"classroom/people.htm", mail:"letters/envelope.htm",
       personal:"users/feiyao-later.htm", after:"letters/reply.htm", record:"classroom/account.htm",
-      ending:"visit/end.htm", missing:"missing.htm"
+      ending:"visit/end.htm", thanks:"visit/thanks.htm", missing:"missing.htm"
     },
     labels: {
       "scene-notes":"现场附记",
@@ -69,7 +69,7 @@
       archive:"教室里的纸", duty:"值班室", warehouse:"后勤仓库", storage:"储物间",
       radio:"广播室那盘旧录音", footsteps:"门外的录音（04）", profile:"一起值日的同学后来怎么说",
       mail:"后来寄来的信", personal:"后来放回来的照片和作文", after:"后来收到的回信",
-      record:"查证说明", ending:"本次浏览", missing:"页面没有找到"
+      record:"查证说明", ending:"本次浏览", thanks:"作者附页", missing:"页面没有找到"
     },
     notes,
     addr(route, params) {

@@ -132,7 +132,15 @@
 
   portal.bindTools = root => root.querySelectorAll("[data-local-tool]").forEach(button => {
     const actions = {notebook:() => H4.app.notebook(), endings:() => H4.Endings.library(),
-      source:() => H4.$("#menu-page-source").click()};
+      source:() => H4.$("#menu-page-source").click(),
+      support:() => {
+        const menu = button.closest("details");
+        if (menu) {
+          menu.open = false;
+          menu.querySelector("summary")?.focus();
+        }
+        H4.Support.show();
+      }};
     button.type = "button";
     button.onclick = actions[button.dataset.localTool];
   });
@@ -188,6 +196,11 @@
       summary.focus();
       H4.$("#menu-page-source").onclick();
     };
+    H4.$("#tool-support").onclick = () => {
+      tools.open = false;
+      summary.focus();
+      H4.Support.show();
+    };
     tools.onkeydown = event => {
       if (event.key !== "Escape" || !tools.open) return;
       event.preventDefault();
@@ -219,7 +232,7 @@
     portal.updateAddress();
   });
 })();
-!function(){"use strict";window.addEventListener("DOMContentLoaded",function(){var e=H4.Portal,t=H4.$("#titlebar"),n=(H4.$("#menubar"),document.createElement("details"));n.id="mobile-more",n.innerHTML='<summary aria-label="本机浏览菜单">⋯</summary><div id="mobile-tools-menu"></div>',t.append(n);var o=n.querySelector("div"),a=["menu-back","menu-home","menu-settings"].map(function(e){var t=H4.$("#"+e),n=document.createComment(e);return t.before(n),{node:t,anchor:n}});o.insertAdjacentHTML("beforeend",'<button data-local-tool="notebook">摘录夹</button><button data-local-tool="endings">浏览记录</button><a href="#/about">关于本站</a><button data-window-action="cover">返回封面</button><button data-window-action="close">结束本次浏览</button>'),e.bindTools(o),o.querySelector('[data-window-action="cover"]').onclick=function(){H4.$("#btn-min").onclick()},o.querySelector('[data-window-action="close"]').onclick=function(){H4.$("#btn-close").onclick()};var r=matchMedia("(max-width:720px)"),i=function(){a.forEach(function(e){r.matches?"menu-back"===e.node.id?(t.prepend(e.node),e.node.textContent="←",e.node.setAttribute("aria-label","返回上一页")):o.prepend(e.node):(e.anchor.after(e.node),"menu-back"===e.node.id&&(e.node.textContent="返回",e.node.removeAttribute("aria-label")))}),r.matches||(n.open=!1)};i(),r.addEventListener("change",i),window.addEventListener("hashchange",function(){n.open=!1});var s=document.createElement("span");s.id="reading-position",s.hidden=!0,s.setAttribute("aria-live","off"),H4.$("#statusbar").insertBefore(s,H4.$(".browser-audio"));var d=H4.$("#screen-wrap"),doc=H4.$("#doc-scroll"),l=H4.$("#screen"),c=0,u=function(){c=0;var d=H4.Shells.scroll(),e=d.clientHeight,t=d.scrollHeight;if(e&&(s.hidden=t<=2*e,!s.hidden)){var n=Math.ceil(t/e),o=Math.min(n,Math.floor(d.scrollTop/e)+1);t-e-d.scrollTop<4&&(o=n),s.textContent=o+" / "+n,s.setAttribute("aria-label","当前约第"+o+"屏，共"+n+"屏")}},m=function(){c||(c=requestAnimationFrame(u))};[d,doc].forEach(function(view){view.addEventListener("scroll",m,{passive:!0}),new ResizeObserver(m).observe(view)}),new ResizeObserver(m).observe(l),document.fonts.ready.then(m),m()})}(),function(){var e=H4.app.notebook;H4.app.notebook=function(){e();var t=H4.$(".notebook"),n=H4.state.flags.originalNotes;if(t&&n){var o=["roster","duty"].filter(function(e){return"string"==typeof n[e]&&n[e].trim()});if(o.length){var a=document.createElement("section");a.className="reader-notes",a.innerHTML="<h3>页边笔记</h3><p>这些是你记的笔记，原表照旧。</p>"+o.map(function(e){return"<h4>"+H4.esc("roster"===e?"旧楼值日组名册":"当日轮值登记")+'</h4><p class="document-text">'+H4.esc(n[e])+"</p>"}).join(""),t.append(a)}}}}(),function(){
+!function(){"use strict";window.addEventListener("DOMContentLoaded",function(){var e=H4.Portal,t=H4.$("#titlebar"),n=(H4.$("#menubar"),document.createElement("details"));n.id="mobile-more",n.innerHTML='<summary aria-label="本机浏览菜单">⋯</summary><div id="mobile-tools-menu"></div>',t.append(n);var o=n.querySelector("div"),a=["menu-back","menu-home","menu-settings"].map(function(e){var t=H4.$("#"+e),n=document.createComment(e);return t.before(n),{node:t,anchor:n}});o.insertAdjacentHTML("beforeend",'<button data-local-tool="notebook">摘录夹</button><button data-local-tool="endings">浏览记录</button><button data-local-tool="support">支持作者</button><a href="#/about">关于本站</a><button data-window-action="cover">返回封面</button><button data-window-action="close">结束本次浏览</button>'),e.bindTools(o),o.querySelector('[data-window-action="cover"]').onclick=function(){H4.$("#btn-min").onclick()},o.querySelector('[data-window-action="close"]').onclick=function(){H4.$("#btn-close").onclick()};var r=matchMedia("(max-width:720px)"),i=function(){a.forEach(function(e){r.matches?"menu-back"===e.node.id?(t.prepend(e.node),e.node.textContent="←",e.node.setAttribute("aria-label","返回上一页")):o.prepend(e.node):(e.anchor.after(e.node),"menu-back"===e.node.id&&(e.node.textContent="返回",e.node.removeAttribute("aria-label")))}),r.matches||(n.open=!1)};i(),r.addEventListener("change",i),window.addEventListener("hashchange",function(){n.open=!1});var s=document.createElement("span");s.id="reading-position",s.hidden=!0,s.setAttribute("aria-live","off"),H4.$("#statusbar").insertBefore(s,H4.$(".browser-audio"));var d=H4.$("#screen-wrap"),doc=H4.$("#doc-scroll"),l=H4.$("#screen"),c=0,u=function(){c=0;var d=H4.Shells.scroll(),e=d.clientHeight,t=d.scrollHeight;if(e&&(s.hidden=t<=2*e,!s.hidden)){var n=Math.ceil(t/e),o=Math.min(n,Math.floor(d.scrollTop/e)+1);t-e-d.scrollTop<4&&(o=n),s.textContent=o+" / "+n,s.setAttribute("aria-label","当前约第"+o+"屏，共"+n+"屏")}},m=function(){c||(c=requestAnimationFrame(u))};[d,doc].forEach(function(view){view.addEventListener("scroll",m,{passive:!0}),new ResizeObserver(m).observe(view)}),new ResizeObserver(m).observe(l),document.fonts.ready.then(m),m()})}(),function(){var e=H4.app.notebook;H4.app.notebook=function(){e();var t=H4.$(".notebook"),n=H4.state.flags.originalNotes;if(t&&n){var o=["roster","duty"].filter(function(e){return"string"==typeof n[e]&&n[e].trim()});if(o.length){var a=document.createElement("section");a.className="reader-notes",a.innerHTML="<h3>页边笔记</h3><p>这些是你记的笔记，原表照旧。</p>"+o.map(function(e){return"<h4>"+H4.esc("roster"===e?"旧楼值日组名册":"当日轮值登记")+'</h4><p class="document-text">'+H4.esc(n[e])+"</p>"}).join(""),t.append(a)}}}}(),function(){
   "use strict";
   const portal=H4.Portal;
   const renderRoute=H4.app.route;
@@ -251,7 +264,8 @@
   function loadController(id) {
     if(ready.has(id))return Promise.resolve();
     if(requests.has(id))return requests.get(id);
-    const loading=script("js/g_"+id+".js?v=35.0.0",()=>!!H4.G[id]).then(()=>{
+    const version=id==="archive"?"36.0.0":"35.0.0";
+    const loading=script("js/g_"+id+".js?v="+version,()=>!!H4.G[id]).then(()=>{
       if(id==="archive")portal.installArchiveHooks();
       ready.add(id);
     }).finally(()=>requests.delete(id));

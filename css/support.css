@@ -1,0 +1,95 @@
+/* The author pages sit outside the game's campus archive. */
+.author-mark { display: block; width: 64px; height: 48px; flex: 0 0 auto; }
+.author-byline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-block-end: 8px;
+  color: #445540;
+  font-weight: 700;
+}
+.author-support-layout {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) minmax(160px,230px);
+  gap: 12px 18px;
+  align-items: center;
+  color: #262a20;
+}
+.author-support-copy p { line-height: 1.7; margin: 0 0 .75em; }
+.author-support-modal .author-qr {
+  margin: 0;
+  padding-inline-start: 12px;
+  border-inline-start: 1px solid #aaa98d;
+  text-align: center;
+}
+.author-qr img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 228px;
+  margin: 0 auto 5px;
+}
+.author-qr img[hidden], .author-qr-error[hidden] { display: none; }
+.author-qr figcaption { font-size: .92em; color: #4a5040; }
+.author-qr-error { margin: 4px 0 0; }
+.author-support-modal .xp-modal-buttons { flex-wrap: wrap; }
+.author-support-modal .xp-modal-buttons button { min-height: 40px; }
+
+html body #screen.route-thanks .author-thanks {
+  width: min(100%,650px);
+  margin: clamp(16px,7vh,70px) auto 28px;
+  background: #f7f4e5;
+  border: 1px solid #a39e83;
+  color: #272c23;
+  font: calc(17px * var(--reading,1))/1.8 "Songti SC",SimSun,"Noto Serif CJK SC",serif;
+}
+.author-letter-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 52px;
+  padding: 4px clamp(12px,5vw,34px);
+  background: #e2e5ce;
+  border-bottom: 1px solid #a39e83;
+  color: #344534;
+  font: 700 .86em/1.35 Tahoma,SimSun,sans-serif;
+}
+.author-letter-body { padding: clamp(14px,5vw,34px) clamp(14px,6vw,46px) 10px; }
+html body #screen.route-thanks .author-letter-body h1 {
+  color: #2e4633;
+  font: 700 clamp(20px,4vw,27px)/1.35 "Songti SC",SimSun,serif;
+  margin: 0 0 .6em;
+}
+.author-letter-body p { margin: 0 0 .75em; }
+.author-letter-body .author-signature {
+  text-align: right;
+  color: #4e6143;
+  font-family: Georgia,serif;
+  font-style: italic;
+}
+.author-letter-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 17px;
+  padding: 4px clamp(14px,6vw,46px) 8px;
+  border-top: 1px dashed #b8b498;
+  font-size: .86em;
+}
+.author-letter-links :is(a,button) { display: inline-flex; align-items: center; min-height: 44px; color: #294e3b; }
+
+@media (max-width: 480px) {
+  .author-support-layout { grid-template-columns: minmax(0,1fr); gap: 8px; }
+  .author-support-modal .author-qr { border-inline-start: 0; padding-inline-start: 0; }
+  .author-support-copy p { margin-block-end: 6px; }
+}
+
+html body #screen .ending-author-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-block-start: 6px;
+  color: var(--era-link,#294e3b);
+  text-decoration: underline;
+}

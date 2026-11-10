@@ -58,7 +58,7 @@
       rooftop:"building/roof.htm", archive:"classroom/papers.htm", duty:"building/duty.htm",
       warehouse:"building/store.htm", storage:"building/extra.htm", radio:"radio/tape.htm",
       footsteps:"radio/04.htm", profile:"classroom/people.htm", mail:"letters/envelope.htm",
-      personal:"users/feiyao-later.htm", after:"letters/reply.htm", record:"classroom/account.htm",
+      personal:"users/linyao-later.htm", after:"letters/reply.htm", record:"classroom/account.htm",
       ending:"visit/end.htm", thanks:"visit/thanks.htm", missing:"missing.htm"
     },
     labels: {

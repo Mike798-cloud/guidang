@@ -4,7 +4,7 @@
   const esc = H4.esc;
   const siteName = "林杳同学";
   const windowTitle = siteName + " — Microsoft Internet Explorer";
-  const addressRoot = "http://home.huailing.edu.cn/feiyao/";
+  const addressRoot = "http://home.huailing.edu.cn/linyao/";
   const sections = {
     home: ["首页", "index.htm"],
     "about-me": ["关于我", "me.htm"],
@@ -347,8 +347,10 @@
 
   function routeFromAddress(input) {
     const address = input.trim().replace(/^https?:\/\//i, "");
-    if (!address.startsWith("home.huailing.edu.cn/feiyao/")) return "";
-    const [file, query] = address.slice("home.huailing.edu.cn/feiyao/".length).split("?");
+    // Accept the previous address prefix for players following a saved bookmark.
+    const prefix = /^home\.huailing\.edu\.cn\/(?:linyao|feiyao)\//.exec(address);
+    if (!prefix) return "";
+    const [file, query] = address.slice(prefix[0].length).split("?");
     const route = !file ? "home" : Object.keys(sections).find(key => sections[key][1] === file);
     return "#/" + (route || "missing") + (route && query ? "?" + query : "");
   }

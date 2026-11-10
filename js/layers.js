@@ -45,7 +45,10 @@
     const query = question < 0 ? "" : input.trim().slice(question + 1);
     const host = portal.schoolRoot.replace(/^https?:\/\//, "");
     const path = raw.replace(/^https?:\/\//i,"");
-    const truth = file => Object.keys(portal.paths).find(key => portal.paths[key] === file);
+    const truth = file => {
+      if (file === "users/feiyao-later.htm") return "personal";
+      return Object.keys(portal.paths).find(key => portal.paths[key] === file);
+    };
     const hash = route => "#/" + route + (query ? "?" + query : "");
     if (path === host.slice(0,-1) || path === host) return hash("snapshot");
     if (path.startsWith(host)) {

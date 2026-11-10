@@ -96,7 +96,7 @@
       '<dt>入学日期</dt><dd>2001年9月1日</dd><dt>学籍登记号</dt><dd>HL01-047</dd>' +
       '<dt>班主任初评</dt><dd>语文较好，喜欢写东西。</dd></dl>' +
       '<p>学校那边还留着' + link("#/school?section=services&id=roster", "旧楼值日组的名单") + "。</p></details>" +
-      (clue("classroom") ? '<p>' + link("#/archive?file=a1", "教室里那张有背字的学籍卡") + '</p>' : "");
+      (clue("classroom") ? '<p>' + link("#/archive?file=a1", "教室里那张学籍卡") + '</p>' : "");
   }
 
   function album() {
@@ -176,7 +176,7 @@
         '</td><td>' + esc(notes.join("　")) + '</td></tr>';
     }).join("");
     return title("广播") + '<div class="student-radio-mast"><span class="student-radio-lamp" aria-hidden="true"></span>' +
-      '<b>槐岭中学广播站</b><span>林杳抄存 · 2003年10月</span></div>' +
+      '<b>槐岭中学广播站</b><span>林杳抄于2003年10月</span></div>' +
       '<div class="student-radio-ledger"><table><caption>十月的点歌本</caption><thead><tr>' +
       '<th scope="col">日期</th><th scope="col">登记</th><th scope="col">曲目</th><th scope="col">备注</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>' +

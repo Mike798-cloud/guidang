@@ -83,10 +83,10 @@
     if (H4.Site03) return Promise.resolve();
     if (!portal._originalLoading) portal._originalLoading = new Promise((done, fail) => {
       const script = document.createElement("script");
-      script.src = "js/site2003.js?v=9.0.0";
+      script.src = "js/site2003.js?v=35.0.0";
       const failed = () => {
         script.remove();
-        fail(new Error("校园网页未读全"));
+        fail(new Error("校园网页没加载完"));
       };
       script.onload = () => H4.Site03 ? done() : failed();
       script.onerror = failed;
@@ -107,7 +107,7 @@
       style.onload = done;
       style.onerror = () => {
         style.remove();
-        fail(new Error("校园网页样式未读全"));
+        fail(new Error("校园网页样式没加载完"));
       };
       document.head.insertBefore(style,H4.$("#era2003-style"));
     });
@@ -122,7 +122,7 @@
       H4.Site03.render(root,params,isHome);
     }).catch(() => {
       if (location.hash !== hash) return;
-      root.innerHTML = '<div class="original-loading"><h1>校园网页没有读全</h1><p>可以重试，或返回首页。</p>' +
+      root.innerHTML = '<div class="original-loading"><h1>校园网页没加载完</h1><p>可以重试，或返回首页。</p>' +
         '<button type="button" class="xp-btn" id="original-retry">重新读取</button> <a href="#/home">返回首页</a></div>';
       H4.$("#original-retry").onclick = () => showSchool(root,params,isHome);
     });
@@ -219,7 +219,7 @@
     portal.updateAddress();
   });
 })();
-!function(){"use strict";window.addEventListener("DOMContentLoaded",function(){var e=H4.Portal,t=H4.$("#titlebar"),n=(H4.$("#menubar"),document.createElement("details"));n.id="mobile-more",n.innerHTML='<summary aria-label="本机浏览菜单">⋯</summary><div id="mobile-tools-menu"></div>',t.append(n);var o=n.querySelector("div"),a=["menu-back","menu-home","menu-settings"].map(function(e){var t=H4.$("#"+e),n=document.createComment(e);return t.before(n),{node:t,anchor:n}});o.insertAdjacentHTML("beforeend",'<button data-local-tool="notebook">摘录夹</button><button data-local-tool="endings">浏览记录</button><a href="#/about">关于本站</a><button data-window-action="cover">返回封面</button><button data-window-action="close">结束本次浏览</button>'),e.bindTools(o),o.querySelector('[data-window-action="cover"]').onclick=function(){H4.$("#btn-min").onclick()},o.querySelector('[data-window-action="close"]').onclick=function(){H4.$("#btn-close").onclick()};var r=matchMedia("(max-width:720px)"),i=function(){a.forEach(function(e){r.matches?"menu-back"===e.node.id?(t.prepend(e.node),e.node.textContent="←",e.node.setAttribute("aria-label","返回上一页")):o.prepend(e.node):(e.anchor.after(e.node),"menu-back"===e.node.id&&(e.node.textContent="返回",e.node.removeAttribute("aria-label")))}),r.matches||(n.open=!1)};i(),r.addEventListener("change",i),window.addEventListener("hashchange",function(){n.open=!1});var s=document.createElement("span");s.id="reading-position",s.hidden=!0,s.setAttribute("aria-live","off"),H4.$("#statusbar").insertBefore(s,H4.$(".browser-audio"));var d=H4.$("#screen-wrap"),doc=H4.$("#doc-scroll"),l=H4.$("#screen"),c=0,u=function(){c=0;var d=H4.Shells.scroll(),e=d.clientHeight,t=d.scrollHeight;if(e&&(s.hidden=t<=2*e,!s.hidden)){var n=Math.ceil(t/e),o=Math.min(n,Math.floor(d.scrollTop/e)+1);t-e-d.scrollTop<4&&(o=n),s.textContent=o+" / "+n,s.setAttribute("aria-label","当前约第"+o+"屏，共"+n+"屏")}},m=function(){c||(c=requestAnimationFrame(u))};[d,doc].forEach(function(view){view.addEventListener("scroll",m,{passive:!0}),new ResizeObserver(m).observe(view)}),new ResizeObserver(m).observe(l),document.fonts.ready.then(m),m()})}(),function(){var e=H4.app.notebook;H4.app.notebook=function(){e();var t=H4.$(".notebook"),n=H4.state.flags.originalNotes;if(t&&n){var o=["roster","duty"].filter(function(e){return"string"==typeof n[e]&&n[e].trim()});if(o.length){var a=document.createElement("section");a.className="reader-notes",a.innerHTML="<h3>本机页边笔记</h3><p>以下由本次浏览者记录，与原件分开保存。</p>"+o.map(function(e){return"<h4>"+H4.esc("roster"===e?"旧楼值日组名册":"当日轮值登记")+'</h4><p class="document-text">'+H4.esc(n[e])+"</p>"}).join(""),t.append(a)}}}}(),function(){
+!function(){"use strict";window.addEventListener("DOMContentLoaded",function(){var e=H4.Portal,t=H4.$("#titlebar"),n=(H4.$("#menubar"),document.createElement("details"));n.id="mobile-more",n.innerHTML='<summary aria-label="本机浏览菜单">⋯</summary><div id="mobile-tools-menu"></div>',t.append(n);var o=n.querySelector("div"),a=["menu-back","menu-home","menu-settings"].map(function(e){var t=H4.$("#"+e),n=document.createComment(e);return t.before(n),{node:t,anchor:n}});o.insertAdjacentHTML("beforeend",'<button data-local-tool="notebook">摘录夹</button><button data-local-tool="endings">浏览记录</button><a href="#/about">关于本站</a><button data-window-action="cover">返回封面</button><button data-window-action="close">结束本次浏览</button>'),e.bindTools(o),o.querySelector('[data-window-action="cover"]').onclick=function(){H4.$("#btn-min").onclick()},o.querySelector('[data-window-action="close"]').onclick=function(){H4.$("#btn-close").onclick()};var r=matchMedia("(max-width:720px)"),i=function(){a.forEach(function(e){r.matches?"menu-back"===e.node.id?(t.prepend(e.node),e.node.textContent="←",e.node.setAttribute("aria-label","返回上一页")):o.prepend(e.node):(e.anchor.after(e.node),"menu-back"===e.node.id&&(e.node.textContent="返回",e.node.removeAttribute("aria-label")))}),r.matches||(n.open=!1)};i(),r.addEventListener("change",i),window.addEventListener("hashchange",function(){n.open=!1});var s=document.createElement("span");s.id="reading-position",s.hidden=!0,s.setAttribute("aria-live","off"),H4.$("#statusbar").insertBefore(s,H4.$(".browser-audio"));var d=H4.$("#screen-wrap"),doc=H4.$("#doc-scroll"),l=H4.$("#screen"),c=0,u=function(){c=0;var d=H4.Shells.scroll(),e=d.clientHeight,t=d.scrollHeight;if(e&&(s.hidden=t<=2*e,!s.hidden)){var n=Math.ceil(t/e),o=Math.min(n,Math.floor(d.scrollTop/e)+1);t-e-d.scrollTop<4&&(o=n),s.textContent=o+" / "+n,s.setAttribute("aria-label","当前约第"+o+"屏，共"+n+"屏")}},m=function(){c||(c=requestAnimationFrame(u))};[d,doc].forEach(function(view){view.addEventListener("scroll",m,{passive:!0}),new ResizeObserver(m).observe(view)}),new ResizeObserver(m).observe(l),document.fonts.ready.then(m),m()})}(),function(){var e=H4.app.notebook;H4.app.notebook=function(){e();var t=H4.$(".notebook"),n=H4.state.flags.originalNotes;if(t&&n){var o=["roster","duty"].filter(function(e){return"string"==typeof n[e]&&n[e].trim()});if(o.length){var a=document.createElement("section");a.className="reader-notes",a.innerHTML="<h3>页边笔记</h3><p>这些是你记的笔记，原表照旧。</p>"+o.map(function(e){return"<h4>"+H4.esc("roster"===e?"旧楼值日组名册":"当日轮值登记")+'</h4><p class="document-text">'+H4.esc(n[e])+"</p>"}).join(""),t.append(a)}}}}(),function(){
   "use strict";
   const portal=H4.Portal;
   const renderRoute=H4.app.route;
@@ -239,7 +239,7 @@
     const request=new Promise((resolve,reject)=>{
       const node=document.createElement("script");
       node.src=url;
-      const fail=()=>{node.remove();reject(new Error("页面没有读全"));};
+      const fail=()=>{node.remove();reject(new Error("这页没加载完"));};
       node.onload=()=>{if(verify())resolve();else fail();};
       node.onerror=fail;
       document.head.append(node);
@@ -251,8 +251,7 @@
   function loadController(id) {
     if(ready.has(id))return Promise.resolve();
     if(requests.has(id))return requests.get(id);
-    const version=["archive","radio","stairs"].includes(id)?"9.0.0":id==="corridor"?"14.0.0":"6.0.0";
-    const loading=script("js/g_"+id+".js?v="+version,()=>!!H4.G[id]).then(()=>{
+    const loading=script("js/g_"+id+".js?v=35.0.0",()=>!!H4.G[id]).then(()=>{
       if(id==="archive")portal.installArchiveHooks();
       ready.add(id);
     }).finally(()=>requests.delete(id));
@@ -279,7 +278,7 @@
       const node=document.createElement("link");
       node.id="material-view-style";node.rel="stylesheet";node.href="css/material_views.css?v=7.0.0";
       node.onload=()=>{portal.materialStyleReady=true;resolve();};
-      node.onerror=()=>{node.remove();reject(new Error("页面没有读全"));};
+      node.onerror=()=>{node.remove();reject(new Error("这页没加载完"));};
       document.head.insertBefore(node,H4.$("#era2003-style"));
     }).finally(()=>{styleRequest=null;});
     return styleRequest;
@@ -289,8 +288,8 @@
     if(portal.materialsReady)return Promise.resolve();
     if(portal.materialsLoading)return portal.materialsLoading;
     const content=H4.MaterialViewsLoaded?Promise.resolve():
-      (H4.app.renderPersonal?Promise.resolve():script("js/personal.js?v=5.1.0",()=>!!H4.app.renderPersonal))
-        .then(()=>script("js/material_views.js?v=6.0.0",()=>!!H4.MaterialViewsLoaded));
+      (H4.app.renderPersonal?Promise.resolve():script("js/personal.js?v=35.0.0",()=>!!H4.app.renderPersonal))
+        .then(()=>script("js/material_views.js?v=35.0.0",()=>!!H4.MaterialViewsLoaded));
     portal.materialsLoading=Promise.all([content,loadMaterialStyle()]).then(()=>{
       portal.materialsReady=true;
     }).finally(()=>{portal.materialsLoading=null;});
@@ -315,16 +314,16 @@
     Promise.all([
       materialNeeded?portal.loadMaterials():null,
       controllerNeeded?loadController(id):null,
-      notesNeeded?script("js/edition_notes.js?v=5.1.0",()=>!!H4.EditionNotes):null,
-      aftermathNeeded?script("js/aftermath.js?v=5.1.0",()=>!!H4.Aftermath):null,
-      editionNeeded?script("js/edition2003.js?v=9.0.0",()=>!!H4.Edition2003):null
+      notesNeeded?script("js/edition_notes.js?v=35.0.0",()=>!!H4.EditionNotes):null,
+      aftermathNeeded?script("js/aftermath.js?v=35.0.0",()=>!!H4.Aftermath):null,
+      editionNeeded?script("js/edition2003.js?v=35.0.0",()=>!!H4.Edition2003):null
     ]).then(()=>{
       if(isCurrent())renderRoute.call(this);
     }).catch(()=>{
       if(!isCurrent())return;
       H4.$("#loader-mask").classList.remove("show");
       H4.Shells.mount("missing");
-      H4.$("#screen").innerHTML='<div class="recovery"><h2>这次页面没有读全</h2><p>本机进度仍在，可以重新读取。</p><button class="xp-btn" id="material-retry">重新读取</button><a href="#/boot">返回封面</a></div>';
+      H4.$("#screen").innerHTML='<div class="recovery"><h2>这页没加载完</h2><p>本机进度仍在，可以重新读取。</p><button class="xp-btn" id="material-retry">重新读取</button><a href="#/boot">返回封面</a></div>';
       const retry=H4.$("#material-retry");
       retry.onclick=()=>this.route();
       retry.focus();

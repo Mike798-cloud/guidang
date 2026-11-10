@@ -157,13 +157,18 @@
         const source = H4.source(id);
         if (source) entries.push({title:source.title,text:source.content,sub:source.sub || "教室里的纸",source:id});
       }
-      entries.push({title:"四楼走廊",text:"走廊 楼梯 照片",sub:"旧楼照片",url:"#/corridor"},
+      entries.push({title:"四楼走廊",text:"旧教学楼四楼 走廊 楼梯 照片",sub:"旧楼照片",url:"#/corridor"},
+        {title:"楼梯间",text:"旧楼楼梯口 门牌 检修路线",sub:"旧楼照片",url:"#/stairs"},
         {title:"林杳的留言",text:H4.data.MESSAGES.join(" "),sub:"林杳同学",url:"#/messages?entry=old"});
       return entries;
     },
     search(root, params, unavailable = false) {
       const query = (params.get("q") || "").trim().slice(0,80);
-      const key = query.toLowerCase();
+      // Keep terms from the earlier pages searchable after updating the displayed copy.
+      const key = query.toLowerCase()
+        .replace(/旧四楼/g, "四楼")
+        .replace(/旧梯口/g, "楼梯口")
+        .replace(/旧梯间/g, "楼梯间");
       const found = key ? n.index().filter(row => (row.title + " " + row.text + " " + row.sub).toLowerCase().includes(key)) : [];
       const listing = paginate(found, 8, params);
       const results = listing.items.map(row => {
@@ -192,7 +197,7 @@
         const pack = H4.Aftermath.pack(id);
         return [pack.date.split(" / ")[0],"#/after?id=" + id,pack.title];
       });
-      root.innerHTML = n.shell("后来寄来的信", "<p>照片放回去以后，又有几个人写了信。每封照写信人的日期放在这里。——陈楼</p>" +
+      root.innerHTML = n.shell("后来寄来的信", "<p>照片放回去以后，又有几个人写了信。我照着信上写的日期排在这里。——陈楼</p>" +
         (rows.length ? listTable(rows) : "<p>暂时没有新来信。</p>") +
         (H4.state.cycle === 2 && H4.state.fragments.length === 7 ?
           '<p>' + link("#/mail","和照片一起寄来的两封信") + '</p>' : ""));
@@ -200,7 +205,7 @@
     },
     about(root) {
       root.innerHTML = n.shell("关于本站", '<article class="maintenance-article"><p>这些网页是2003年秋天留下的。后来找到的几页，我加在后面，标了拿到的日子。原来的字没有改。</p>' +
-        '<p>有几张纸能对得上，也有几个人说的不一样。到天台那晚最后几分钟，没有一张纸写清楚。你看到两种说法的时候，都先留着。</p>' +
+        '<p>有几张纸能对得上，也有几个人说的不一样。那天夜里最后几分钟的事，这几张纸都没写清。有人后来改了说法，我把两次的话都放上来了。</p>' +
         '<p class="campus-date">陈楼　2004-01-06</p><p>' + link("#/directory?section=notes","我写的几条手记") + '　' +
         link("#/snapshot","校园网 2003") + '</p><p class="campus-date">虚构作品 · abc studio</p></article>');
       n.wire(root);
@@ -273,4 +278,4 @@ var r={c1:{options:["共同说明中的离楼时间与巡逻记录相冲突","�
     reader.appendChild(turn);
     reader.setAttribute("tabindex","-1");
   };
-},n.waiting=function(t,a,r,o){t.innerHTML=n.shell("待保存页面",'<article class="waiting-record"><p class="eyebrow">入口仍保留 / 内容尚未开放</p><h2>'+e(a)+"</h2><p>"+e(r)+'</p><div class="page-links">'+o.map(function(t){return'<a href="#/'+t[0]+'">'+e(t[1])+"</a>"}).join("")+"</div></article>"),n.wire(t)};var l=H4.Endings.choose;H4.Endings.choose=function(e){if("stay"===e&&(2!==H4.state.cycle||7!==H4.state.fragments.length||5!==H4.state.contradictions.length))return["a2","a6"].every(function(e){return H4.state.read.includes(e)})?void H4.Endings.start("e4"):void H4.modal({title:"先认识照片里的她",bodyHTML:"<p>图书室借阅单与《槐花》作业里，留着她自己想做的事。先去读读，再回来留下这句话。</p>",buttons:[{label:"查看教室里的纸",onClick:function(){H4.go("#/archive")}},{label:"暂时收好"}]});l.call(this,e)};var c=H4.Endings.library;H4.Endings.library=function(){c.call(this);var e=H4.$("#ending-records");e.className="ending-grid",e.querySelectorAll("button").forEach(function(e,t){e.disabled&&(e.textContent="？ / "+["转身离开这次浏览","留下可复核的原件","留下简要的公开说明","记住她的日常","再次浏览，整理照片与来信"][t])})},window.addEventListener("DOMContentLoaded",function(){var a=document.createElement("span");a.id="route-announcement",a.className="sr-only",a.setAttribute("aria-live","polite"),document.body.appendChild(a);H4.$("#btn-max").textContent="字",H4.$("#btn-max").title="调整阅读字号",H4.$("#btn-max").setAttribute("aria-label","调整阅读字号"),H4.$("#btn-max").onclick=H4.app.settings;var o=document.createElement("button");o.id="menu-source",o.textContent="来源",o.onclick=function(){H4.go("#/versions")},H4.$("#menubar").insertBefore(o,H4.$("#menu-settings"));var i=document.createElement("button");i.textContent="页源",i.id="menu-page-source",i.onclick=function(){H4.$("#screen").dataset.route;var t=H4.$("#screen").cloneNode(!0);t.querySelectorAll("input,textarea").forEach(function(e){e.removeAttribute("value"),e.textContent=""});var a="\x3c!-- 当前页的 HTML，仅供查看网页结构。 --\x3e\n\x3c!-- 来源日期请见各原件；本窗口不增加线索。 --\x3e\n"+t.innerHTML;H4.modal({title:"当前网页的源代码",bodyHTML:'<pre class="source-code">'+e(a)+"</pre>"})},H4.$("#menubar").insertBefore(i,H4.$("#menu-settings"))})})();
+},n.waiting=function(t,a,r,o){t.innerHTML=n.shell("这页还没写好",'<article class="waiting-record"><p class="eyebrow">照片和作文还在原来的页上。</p><h2>'+e(a)+"</h2><p>"+e(r)+'</p><div class="page-links">'+o.map(function(t){return'<a href="#/'+t[0]+'">'+e(t[1])+"</a>"}).join("")+"</div></article>"),n.wire(t)};var l=H4.Endings.choose;H4.Endings.choose=function(e){if("stay"===e&&(2!==H4.state.cycle||7!==H4.state.fragments.length||5!==H4.state.contradictions.length))return["a2","a6"].every(function(e){return H4.state.read.includes(e)})?void H4.Endings.start("e4"):void H4.modal({title:"先认识照片里的她",bodyHTML:"<p>图书室借阅单与《槐花》作业里，留着她自己想做的事。先去读读，再回来留下这句话。</p>",buttons:[{label:"回教室看材料",onClick:function(){H4.go("#/archive")}},{label:"暂时收好"}]});l.call(this,e)};var c=H4.Endings.library;H4.Endings.library=function(){c.call(this);var e=H4.$("#ending-records");e.className="ending-grid",e.querySelectorAll("button").forEach(function(e,t){e.disabled&&(e.textContent="？ / "+["结束这次浏览","留下可复核的原件","留下简要的公开说明","记住她的日常","把照片和来信放在一起"][t])})},window.addEventListener("DOMContentLoaded",function(){var a=document.createElement("span");a.id="route-announcement",a.className="sr-only",a.setAttribute("aria-live","polite"),document.body.appendChild(a);H4.$("#btn-max").textContent="字",H4.$("#btn-max").title="调整阅读字号",H4.$("#btn-max").setAttribute("aria-label","调整阅读字号"),H4.$("#btn-max").onclick=H4.app.settings;var o=document.createElement("button");o.id="menu-source",o.textContent="来源",o.onclick=function(){H4.go("#/versions")},H4.$("#menubar").insertBefore(o,H4.$("#menu-settings"));var i=document.createElement("button");i.textContent="源文件",i.id="menu-page-source",i.onclick=function(){H4.$("#screen").dataset.route;var t=H4.$("#screen").cloneNode(!0);t.querySelectorAll("input,textarea").forEach(function(e){e.removeAttribute("value"),e.textContent=""});var a="\x3c!-- 当前页的 HTML，仅供查看网页结构。 --\x3e\n\x3c!-- 来源日期请见各原件；本窗口不增加线索。 --\x3e\n"+t.innerHTML;H4.modal({title:"当前网页的源代码",bodyHTML:'<pre class="source-code">'+e(a)+"</pre>"})},H4.$("#menubar").insertBefore(i,H4.$("#menu-settings"))})})();

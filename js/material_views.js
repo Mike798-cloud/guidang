@@ -1,6 +1,6 @@
 (() => {
   "use strict";
-  var e=H4.Portal,t=H4.esc,r={"张耀主":"他的名字在共同说明里。先翻教室留下的那摞纸，再对照这份说法。","小子":"检讨书上也用了这个称呼。教室里那份检讨与共同说明，是这页的起头。","清东":"他写在纸上的编号，需要同借还登记并读。先在档案室的“整理纸张”里把十二件主件归好。","刘楼":"先到教室档案室，把十二张纸按顺序摆好。回来再看他在旧梯口见过什么。","萧神":"节目安排也在教室那批纸中。把十二件主件按日期或人物归好，再读他的解释。","王京":"旧梯间还能通向后勤仓库。先去找交班材料，再来看这份关于门锁的说法。","张耀兰":"封条后面的门还没看过。回走廊找那页签字，借还登记要留着一同核对。","张纪兰":"先把档案室的十二张纸摆好，再回来读她对作业本的说法。","于祯":"先把共同说明和其他主件一起摆好。十二件都归位以后，再来对照他的签名与口述。","张耀王":"这页提到了四楼的另一道门。走廊上的照片还可以换个方向看，先回原处走走。","豆庵":"广播的频率记在点歌本上。先收好六段录音，再来对照他记得的声音。","张锦兰":"关于护栏的说法还缺04号封袋里的材料。先打开声音附件，再把两边的原话放在一起。","陈楼":"陈楼也在那张名单上。这是他自己说的。点歌本上记了六个频率。收齐那六段录音，再来看陈楼怎么说。"};H4.app.profileGuide=function(e){var t=H4.data.PROFILES[e].unlock,o="archive",a="去教室翻原件";if("clue_testimony"===t&&(a="回档案室整理主件"),"clue_warehouse"===t&&(o="stairs",a="回旧梯间找后勤仓库"),"clue_storage"!==t&&"clue_abnormal"!==t||(o="corridor",a="clue_storage"===t?"回走廊找封条后的门":"回走廊换个方向看"),"clue_audio"===t){var n=H4.hasClue("clue_radio_key")||H4.state.radio.length;o=n?"radio":"stairs",a=n?"回广播室收好片段":"回旧梯间找广播室"}return"clue_report"===t&&(o="footsteps",a="打开04号声音附件"),{text:r[e],route:o,label:a}};
+  var e=H4.Portal,t=H4.esc,r={"张耀主":"他在《共同说明》上签了名。先去教室翻那份纸，再来看他怎么说。","小子":"检讨书上也写着「小子」。先去教室看看那份检讨书。","清东":"他提到了钥匙编号。先去教室整理那十二份材料，借还单也在里面。","刘楼":"先把教室里的十二份材料整理好，再来看他在楼梯口见过什么。","萧神":"点歌登记在教室里。先整理那十二份材料，回来就能看他怎么解释。","王京":"从楼梯间能到后勤仓库。先去找王京的交班单，再来看他说的门锁。","张耀兰":"封条后面的门还没看过。回走廊找那页签字，借还登记要留着一同核对。","张纪兰":"先整理教室里的十二份材料，再来看她记得的那本作业本。","于祯":"先整理教室里的十二份材料，再对照他签过的那张纸和他后来讲的话。","张耀王":"他说四楼还有一道门。回四楼走廊，回头看看。","豆庵":"广播的频率记在点歌本上。先收好六段录音，再来对照他记得的声音。","张锦兰":"04号封袋里还有一份写到护栏的材料。先去听录音、拆开封袋。","陈楼":"陈楼也在那张名单上。这是他自己说的。点歌本上记了六个频率。收齐那六段录音，再来看陈楼怎么说。"};H4.app.profileGuide=function(e){var t=H4.data.PROFILES[e].unlock,o="archive",a="去教室翻原件";if("clue_testimony"===t&&(a="回教室整理材料"),"clue_warehouse"===t&&(o="stairs",a="回楼梯间，找后勤仓库"),"clue_storage"!==t&&"clue_abnormal"!==t||(o="corridor",a="clue_storage"===t?"回走廊找封条后的门":"回走廊换个方向看"),"clue_audio"===t){var n=H4.hasClue("clue_radio_key")||H4.state.radio.length;o=n?"radio":"stairs",a=n?"回广播室收好片段":"回楼梯间，找广播室"}return"clue_report"===t&&(o="footsteps",a="去听04号录音"),{text:r[e],route:o,label:a}};
   const roomRoutes = new Set(["duty","warehouse","storage"]);
   const wrappedRoutes = new Set(["profile","mail","after","record","radio","footsteps",...roomRoutes]);
   const make = (tag,className,html = "") => {
@@ -28,7 +28,7 @@
       pending(root,e.labels.profile,"profile",'<label for="waiting-person">同学名单</label> ' +
         '<select id="waiting-person"><option value="">请选择姓名</option>' + names +
         '</select> <button type="button" class="xp-btn" id="waiting-person-open">打开</button>',
-        "选一个名字","纸上对得上的话放在姓名下面，还有些要先去找出处。",[["archive","教室里的纸"],["messages","回留言本"]]);
+        "选一个名字","点名字看他怎么说。有的要先找到相应的材料。",[["archive","教室里的纸"],["messages","回留言本"]]);
       root.querySelector("#waiting-person-open").onclick = () => {
         const name = root.querySelector("#waiting-person").value;
         if (H4.data.NAMES.includes(name)) H4.go("#/profile?n=" + encodeURIComponent(name));
@@ -82,7 +82,7 @@
     if (roomRoutes.has(route) && root.querySelector(".room-" + route)) room(root,route);
     if (route === "profile") {
       const note = root.querySelector(".testimony .source-note");
-      if (note) note.textContent = "陈楼记于2004年1月6日。后来问到的话另写在下面，原话照录。";
+      if (note) note.textContent = "陈楼记，2004年1月6日。后来问的几句也抄在下面。";
     }
     if (route === "record") {
       const pages = root.querySelectorAll(".record-original");

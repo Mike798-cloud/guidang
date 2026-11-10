@@ -38,9 +38,9 @@
   ).join("");
   const photoEntries = [
     ['site03_classroom.webp', '旧楼教室的桌椅与窗户', '原站附图 / 教室', '#/school?section=building'],
-    ['corridor_1.webp', '旧四楼第一段走廊', '照片附页 / 四楼走廊', '#/corridor'],
+    ['corridor_1.webp', '旧教学楼四楼走廊', '照片附页 / 四楼走廊', '#/corridor'],
     ['courtyard_memory.webp', '外婆家的院子', '同学主页 / 院子', '#/album'],
-    ['attachment_envelope.webp', '编号04的声音附件封袋', '附件信封 / 04号', '#/footsteps']
+    ['attachment_envelope.webp', '04号录音的封袋', '附件信封 / 04号', '#/footsteps']
   ];
   function preview(entries) {
     return create("div", "edition-preview", entries.map(([file, alt, caption, href]) =>
@@ -58,9 +58,9 @@
     const tuning = panel.querySelector(".folio-radio-tuning");
     const photoRegister = create("div", "edition-photo-register edition-receiver");
     receiver.before(photoRegister);
-    receiver.append(create("p", "edition-photo-fields", "广播室附图 01 · 原照片未落日"));
+    receiver.append(create("p", "edition-photo-fields", "广播室照片 01 · 没标拍摄日期"));
     const reception = create("aside", "edition-reception",
-      '<h3 class="edition-subhead">接收频率</h3><p>原带声音可反复播放。频率刻度与下方波形的播放时标分开读。</p>');
+      '<h3 class="edition-subhead">接收频率</h3><p>上面是调台用的频率，下面是这段录音播了几秒。</p>');
     reception.append(tuning.querySelector("#radio-signal"), panel.querySelector(".recording-source"));
     photoRegister.append(receiver, tuning, reception);
     const dial = tuning.querySelector(".radio-dial");
@@ -99,7 +99,7 @@
     transcript.before(fold);
     fold.append(transcript, aloud);
     panel.append(create("p", "edition-radio-note edition-copy",
-      "波形下是这次重播的秒数。原带停机那段缺了多久，听写稿上没记。"));
+      "下面的秒数只算这一段播了多久。"));
   }
 
   function footsteps(root) {
@@ -118,11 +118,11 @@
     meter.value = 0;
     meter.setAttribute("aria-label", "脚步音轨播放位置");
     visual.before(meter);
-    controls.append(box("播放位置", textTable("声音分段 / 不预填步数", ["段", "记录"], [
-      ["前段", "门外出现第一组脚步，听完再填。"],
-      ["中段", "声音有停顿，折返仍按每次落地记。"],
-      ["末段", "最后一次脚步过后，才开放核对。"]
-    ]) + '<p>进度条走到的是播放位置。每次脚落地算一步；静音时可开同步脚印。封袋拆开后，纸件会放回教室那页。</p>'));
+    controls.append(box("播放位置", textTable("脚步录音分段", ["段", "记录"], [
+      ["前段", "先听第一组脚步。"],
+      ["中段", "中间会停一下，折回来的脚步也算。"],
+      ["末段", "脚步停下来以后就能填。"]
+    ]) + '<p>进度条只显示播到了哪儿。静音时可以打开同步脚印。拆开封袋后，回教室也能看这份材料。</p>'));
   }
 
   function archiveRoom(root) {
@@ -238,7 +238,7 @@
     const spot = H4.Stage.button(label, () => {
       const line = typeof text === "function" ? text() : text;
       const buttons = ["corridor","stairs","rooftop","basement"].includes(route)
-        ? [{label:"读现场附记", onClick:() => { H4.Stage.rememberOrigin(spot); H4.go(noteUrl(route)); }}, {label:"合上"}]
+        ? [{label:"看照片说明", onClick:() => { H4.Stage.rememberOrigin(spot); H4.go(noteUrl(route)); }}, {label:"合上"}]
         : [{label:"合上"}];
       H4.modal({title:label, bodyHTML:"<p>" + esc(line) + "</p>", buttons});
     });
@@ -325,7 +325,7 @@
         route:"basement",title:"地下室",notes:true,exit:"#/stairs",art:page.querySelector(".bg-img"),
         spots:[paper,lamp,door,wall],actions:[open],content:desk,panelSize:"long",
         feedback:[create("p","stage-line","灯泡在门廊里嗡嗡响，地上几张纸还没湿透。")],
-        intro:"门边这几片纸，能拼回那张没交上去的换班申请。"
+        intro:"门边这几片纸，拼起来是一张换班申请。"
       });
     }
   };
@@ -395,7 +395,7 @@
       radio: {page:".radio-page", art:".bg-img", content:".radio-panel",
         title:"广播室", label:"调收音机", exit:"#/stairs", x:55, y:64},
       footsteps: {page:".footsteps-page", art:".attachment-object img", content:".folio-attachment-controls",
-        title:"04号声音附件", label:"听门外的脚步", exit:"#/archive", x:51, y:49}
+        title:"04号录音", label:"听门外的脚步", exit:"#/archive", x:51, y:49}
     };
     const spec = configs[route];
     const page = root.querySelector(spec.page);
@@ -451,7 +451,7 @@
     const [image,caption] = photos[route];
     const content = (locked ? "<p>这一张只拍到门和台阶。锁扣还挂在原处。</p>" : prose(record.paragraphs.slice(0,1))) +
       photo(image,caption,caption,true) + (locked ? "" : prose(record.paragraphs.slice(1)));
-    root.innerHTML = '<article class="field-notes"><p class="field-notes-mast">陈楼 · 旧教学楼照片附记</p><h1>' +
+    root.innerHTML = '<article class="field-notes"><p class="field-notes-mast">陈楼 · 旧教学楼照片说明</p><h1>' +
       titles[route] + '</h1>' + content + '<nav aria-label="相关材料">' + links(record.links) +
       '<p class="field-notes-back">' + link("#/" + route,"回到现场") + '</p></nav></article>';
     const back = root.querySelector(".field-notes-back a");
